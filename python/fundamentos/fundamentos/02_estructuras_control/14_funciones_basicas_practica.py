@@ -51,7 +51,7 @@ def valores_multiplicados_segundo(lista):
         long = len(nuevaLista)
         print(long)
         return nuevaLista 
-    
+     
 def resultado4():
     result4 = valores_multiplicados_segundo([100, 3, 50, 20])
     print(result4)
