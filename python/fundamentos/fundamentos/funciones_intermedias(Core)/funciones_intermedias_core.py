@@ -12,6 +12,15 @@ streamers = [
 
 streamers[0]["nombre"] = "EliteGamerX"
 
+def obtener_valores(clave, lista):
+   for diccionario in lista:
+      print(diccionario[clave])
+   print()
+
+   pass
+obtener_valores("nombre", streamers)
+obtener_valores("seguidores", streamers)
+
 # Eventos en distintas ciudades del mundo
 eventos = {
    "Estados Unidos": ["Los Ángeles", "Nueva York", "Las Vegas"],
@@ -43,4 +52,9 @@ categorias = {
    ]
 }
 
+def mostrar_informacion(diccionario):
+   for clave, lista in diccionario.items():
+      print(f"{len(lista)} {clave.upper()}")
+      for elemet in lista:
+         print(elemet)
 mostrar_informacion(categorias)
