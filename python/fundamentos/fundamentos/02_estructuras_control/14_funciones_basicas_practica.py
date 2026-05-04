@@ -77,7 +77,7 @@ def resultado5():
 def limpiarConsola():
     os.system('cls')
 
-continuar = True
+continuar = False
 while continuar:
     print("\n ejercicio python: ")
     print("--- 1.- Ejercicio  1 ---:")
