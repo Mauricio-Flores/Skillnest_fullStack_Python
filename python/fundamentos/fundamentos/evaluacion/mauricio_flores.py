@@ -2,7 +2,7 @@ import time
 import sys
 def carga():
     an = ["/", "-", "\\"]
-    for i in range(30):
+    for i in range(20):
         print(f"\rCargando {an[i % len(an)]}", end="")
         sys.stdout.flush()
         time.sleep(0.1)
@@ -39,6 +39,7 @@ def ingresarDatos():
         print("Ingresa un valor valido.")
     else:
         if lim.isdigit():
+            limpiarConsola()
             limite = int(lim)
             for i in range(limite):
                 edad = input(f"{i + 1}>>> ")
@@ -52,6 +53,7 @@ def ingresarDatos():
                     else:
                         print("Valor invalido")
                         continue
+            carga()
             print(clasificacionEdades(edades))
         else:
             limpiarConsola()
@@ -95,10 +97,12 @@ while not menu:
             n = int(nn)
             if n == 1:
                 limpiarConsola()
+                carga()
                 print("Ejercicio N°1\n")
                 ingresarDatos()
             elif n == 2:
                 limpiarConsola()
+                carga()
                 print("Ejercicio N°2\n")
                 ejercicio2()
             elif n == 0:
