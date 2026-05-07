@@ -1,3 +1,12 @@
+import time
+import sys
+def carga():
+    an = ["/", "-", "\\"]
+    for i in range(30):
+        print(f"\rCargando {an[i % len(an)]}", end="")
+        sys.stdout.flush()
+        time.sleep(0.1)
+    print("\rPrograma cargado con exito")
 import os
 def limpiarConsola():
     os.system('cls')
@@ -21,6 +30,32 @@ def clasificacionEdades(edad):
         else: 
             valoresInvalidos += 1
     return f"Total edades: {edad}\nAdultos mayores: {adultoMayor}\nAdultos: {adultos}\nMenores de edad: {menorEdad}\nVampiros: {valoresInvalidos}"
+
+def ingresarDatos():
+    edades = []
+    lim = input("¿Cuantas edades quieres ingresar?\n>")
+    if lim == "":
+        limpiarConsola()
+        print("Ingresa un valor valido.")
+    else:
+        if lim.isdigit():
+            limite = int(lim)
+            for i in range(limite):
+                edad = input(f"{i + 1}>>> ")
+                if edad == "":
+                    print("Valor invalido")
+                    continue
+                else:
+                    if edad.isdigit():
+                        Edad = int(edad)
+                        edades.append(Edad)
+                    else:
+                        print("Valor invalido")
+                        continue
+            print(clasificacionEdades(edades))
+        else:
+            limpiarConsola()
+            print("Ingresa un valor valido")
 # Ejercicio N°2 ---------------------------------------------------------------- Martin Acevedo
 def numerosPares(lista):
     # Inicia con una lista vacía para almacenar los números pares
@@ -50,6 +85,7 @@ def ejercicio2():
 
 menu = False
 while not menu:
+    carga()
     nn = input("Elegir ejercicio (1 - 2) 0 para salir \n")
     if nn == "":
         limpiarConsola()
@@ -60,30 +96,7 @@ while not menu:
             if n == 1:
                 limpiarConsola()
                 print("Ejercicio N°1\n")
-                edades = []
-                lim = input("¿Cuantas edades quieres ingresar?\n>")
-                if lim == "":
-                    limpiarConsola()
-                    print("Ingresa un valor valido.")
-                else:
-                    if lim.isdigit():
-                        limite = int(lim)
-                        for i in range(limite):
-                            edad = input(f"{i + 1}>>> ")
-                            if edad == "":
-                                print("Valor invalido")
-                                continue
-                            else:
-                                if edad.isdigit():
-                                    Edad = int(edad)
-                                    edades.append(Edad)
-                                else:
-                                    print("Valor invalido")
-                                    continue
-                        print(clasificacionEdades(edades))
-                    else:
-                        limpiarConsola()
-                        print("Ingresa un valor valido")
+                ingresarDatos()
             elif n == 2:
                 limpiarConsola()
                 print("Ejercicio N°2\n")
