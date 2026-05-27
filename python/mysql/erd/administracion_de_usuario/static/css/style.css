@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.inicio-sesion{
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.content {
+    display: flex;
+    gap: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+input {
+    height: 20px;
+    margin-top: 9px;
+}
+
+.registro {
+    text-align: center;
+    margin-right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+button {
+    box-shadow: 1px 1px 1px 1px #000;
+}
