@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon no encontrado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="contenedor-404">
+        <p class="emoji-404">❓</p>
+        <h1>Pokémon no encontrado</h1>
+        <p class="mensaje-404">{{ mensaje }}</p>
+        <a href="/pokemon" class="btn-detalles">Volver a la Pokédex</a>
+    </div>
+</body>
+
+</html>

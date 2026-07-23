@@ -1,15 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="python/core/pokedex_app_mauricio_flores_2026-07-22/static/css/style.css">
+    <title>Pokédex</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
-    
-    
 
-    <script src="python/core/pokedex_app_mauricio_flores_2026-07-22/static/js/script.js"></script>
+<body>
+
+    <header class="cabecera">
+        <h1>Pokédex</h1>
+        <p class="subtitulo">{{ titulo }}</p>
+        <nav class="botones-nav">
+            <a href="/pokemon" class="btn-nav btn-nav-azul">☰ Ver todos</a>
+            <a href="/pokemon/cantidad/5" class="btn-nav btn-nav-verde">✓ Ver 5 primeros</a>
+        </nav>
+    </header>
+
+    <main class="grid-pokemon">
+        {% for p in pokemons %}
+        <article class="tarjeta">
+            <div class="tarjeta-imagen">
+                <span class="numero">#{{ p.id }}</span>
+                <img src="{{ url_for('static', filename='img/' ~ p.imagen) }}" alt="{{ p.nombre }}">
+            </div>
+            <div class="tarjeta-info">
+                <h2>{{ p.nombre }}</h2>
+
+                <div class="tipos">
+                    {% for t in p.tipo.split('/') %}
+                    <span class="tipo tipo-{{ t.lower() }}">{{ t }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="poder">
+                    <div class="poder-texto">
+                        <span>⚡ Poder</span>
+                        <span>{{ p.poder }}</span>
+                    </div>
+                    <div class="poder-barra">
+                        <div class="poder-relleno" style="width: {{ (p.poder / 200 * 100) | round(1) }}%"></div>
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <div class="stat">
+                        <span class="icono">📏</span> Altura
+                        <strong>{{ p.altura }}</strong>
+                    </div>
+                    <div class="stat">
+                        <span class="icono">⚖️</span> Peso
+                        <strong>{{ p.peso }}</strong>
+                    </div>
+                </div>
+
+                <a href="/pokemon/{{ p.nombre.lower() }}" class="btn-detalles">Ver detalles</a>
+            </div>
+        </article>
+        {% else %}
+        <p class="sin-resultados">No hay Pokémon para mostrar.</p>
+        {% endfor %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
+
 </html>
