@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokédex</title>
+    <title>Pokedex</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap"
@@ -15,11 +15,11 @@
 <body>
 
     <header class="cabecera">
-        <h1>Pokédex</h1>
+        <h1>Pokedex</h1>
         <p class="subtitulo">{{ titulo }}</p>
         <nav class="botones-nav">
             <a href="/pokemon" class="btn-nav btn-nav-azul">☰ Ver todos</a>
-            <a href="/pokemon/cantidad/5" class="btn-nav btn-nav-verde">✓ Ver 5 primeros</a>
+            <a href="/pokemon/cantidad/5" class="btn-nav btn-nav-verde">Ver 5 primeros</a>
         </nav>
     </header>
 
@@ -41,7 +41,7 @@
 
                 <div class="poder">
                     <div class="poder-texto">
-                        <span>⚡ Poder</span>
+                        <span>Poder</span>
                         <span>{{ p.poder }}</span>
                     </div>
                     <div class="poder-barra">
@@ -51,11 +51,11 @@
 
                 <div class="stats">
                     <div class="stat">
-                        <span class="icono">📏</span> Altura
+                        <span>Altura</span>
                         <strong>{{ p.altura }}</strong>
                     </div>
                     <div class="stat">
-                        <span class="icono">⚖️</span> Peso
+                         <span>Peso</span>
                         <strong>{{ p.peso }}</strong>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
             </div>
         </article>
         {% else %}
-        <p class="sin-resultados">No hay Pokémon para mostrar.</p>
+        <p class="sin-resultados">No hay Pokemon para mostrar.</p>
         {% endfor %}
     </main>
 

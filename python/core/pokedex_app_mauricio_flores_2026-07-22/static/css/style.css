@@ -32,7 +32,7 @@ body {
 
 .cabecera h1 {
     font-family: 'Poppins', sans-serif;
-    font-size: 2.2rem;
+    font-size: 40px;
     font-weight: 800;
     color: var(--azul-oscuro);
     margin: 0 0 4px;
@@ -41,7 +41,7 @@ body {
 .subtitulo {
     color: var(--texto-suave);
     margin: 0 0 20px;
-    font-size: 1rem;
+    font-size: 17px;
 }
 
 .botones-nav {
@@ -100,34 +100,27 @@ body {
     flex-direction: column;
 }
 
-.tarjeta:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--sombra-hover);
-}
-
 .tarjeta-imagen {
     position: relative;
     height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: repeating-linear-gradient(135deg,
+    background: repeating-linear-gradient(120deg,
             #dbe4f0,
             #dbe4f0 12px,
             #cbd8ea 12px,
-            #cbd8ea 24px);
+            #cbd8ea 22px);
 }
 
 .tarjeta-imagen img {
-    max-height: 110px;
+    max-height: 100px;
     max-width: 80%;
     object-fit: contain;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
 }
 
 .imagen-no-disponible {
-    font-size: 0.8rem;
-    font-weight: 700;
+    font-size: 15px;
     color: var(--texto-suave);
     background: #f1f5f9;
     border: 1px dashed #cbd5e1;
@@ -141,10 +134,11 @@ body {
     right: 10px;
     background: rgba(15, 23, 42, 0.72);
     color: #fff;
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 10px;
+    text-align: center;
     padding: 3px 9px;
-    border-radius: 999px;
+    border-radius: 5px;
+    width: 40px;
 }
 
 .tarjeta-info {
@@ -157,7 +151,7 @@ body {
 
 .tarjeta-info h2 {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.15rem;
+    font-size: 20px;
     text-align: center;
     margin: 0;
 }
@@ -170,12 +164,14 @@ body {
 }
 
 .tipo {
-    font-size: 0.7rem;
+    font-size: 12px;
     font-weight: 700;
     color: #fff;
     padding: 3px 12px;
-    border-radius: 999px;
+    border-radius: 10px;
     text-transform: capitalize;
+    width: 40%;
+    text-align: center;
 }
 
 .tipo-planta {
@@ -221,7 +217,7 @@ body {
 .poder-texto {
     display: flex;
     justify-content: space-between;
-    font-size: 0.8rem;
+    font-size: 13px;
     font-weight: 700;
     color: var(--texto-suave);
 }
@@ -238,14 +234,14 @@ body {
     height: 100%;
     background: linear-gradient(90deg, var(--azul), #60a5fa);
     border-radius: 999px;
-    transition: width 3s ease;
+    transition: width 1s ease;
 }
 
 .stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    justify-content: space-around;
     gap: 10px;
-    font-size: 0.78rem;
+    font-size: 13px;
     color: var(--texto-suave);
     text-align: center;
     border-top: 1px solid var(--borde);
@@ -256,23 +252,18 @@ body {
 .stats strong {
     display: block;
     color: var(--texto);
-    font-size: 0.9rem;
+    font-size: 15px;
     margin-top: 2px;
-}
-
-.icono {
-    font-size: 0.85rem;
 }
 
 .btn-detalles {
     text-align: center;
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 15px;
     color: var(--azul);
     border: 1.5px solid var(--azul);
-    padding: 8px;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: background 0.15s ease, color 0.15s ease;
 }
 
@@ -298,7 +289,7 @@ body {
 
 .contenedor-404 h1 {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.3rem;
+    font-size: 22px;
     margin: 8px 0 12px;
 }
 
