@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2937;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.cabecera {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cabecera h1 {
+    color: #2563eb;
+    margin-bottom: 4px;
+}
+
+.subtitulo {
+    color: #6b7280;
+    margin: 0;
+}
+
+.filtros {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    width: 860px;
+    box-sizing: border-box;
+}
+
+.filtros-titulo {
+    font-size: 15px;
+    font-weight: bold;
+    color: #1f2937;
+    margin: 0 0 12px 0;
+}
+
+.filtros-campos {
+    display: flex;
+    gap: 20px;
+}
+
+.campo {
+    width: 260px;
+}
+
+.campo label {
+    display: block;
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 5px;
+}
+
+.campo select {
+    width: 260px;
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #e5e7eb;
+}
+
+table {
+    width: 860px;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #111827;
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.badge {
+    background-color: #2563eb;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.badge-pais {
+    background-color: #4b5563;
+}
+
+.btn-detalle {
+    border-radius: 13px;
+    border: 1px solid #06b6d4;
+    background: white;
+    color: #06b6d4;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+}
+
+.sin-datos {
+    text-align: center;
+    color: #6b7280;
+    padding: 20px;
+}
+
+.conteo {
+    text-align: right;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.pie {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: 25px;
+}
