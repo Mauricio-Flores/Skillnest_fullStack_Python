@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestras Frutas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-success">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+            <i class="bi bi-apple"></i> Mercado de Frutas
+        </a>
+
+        <div>
+            <a class="text-white text-decoration-none me-3" href="{{ url_for('index') }}">Inicio</a>
+            <a class="text-white text-decoration-none" href="{{ url_for('catalogo') }}">Catálogo</a>
+        </div>
+    </div>
+</nav>
+
+<header class="catalogo-hero">
+    <h1>Nuestras Frutas</h1>
+    <p>Descubre nuestra variedad de frutas frescas disponibles</p>
+</header>
+
+<div class="container catalogo-container">
+
+    <div class="row g-2">
+
+        {% for fruta in frutas %}
+
+        <div class="col-md-3">
+
+            <div class="card catalogo-card shadow-sm">
+
+                <img
+                    src="{{ url_for('static', filename='images/' + fruta.imagen) }}"
+                    class="card-img-top"
+                    alt="{{ fruta.nombre }}"
+                >
+
+                <div class="catalogo-info">
+                    <strong>{{ fruta.nombre }}</strong>
+                    <span>${{ fruta.precio }}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="text-center my-4">
+        <a href="{{ url_for('index') }}" class="btn btn-primary btn-sm">
+            <i class="bi bi-cart-fill"></i>
+            Hacer un pedido
+        </a>
+    </div>
+
+    <h4 class="text-center mb-4">¿Por qué elegirnos?</h4>
+
+    <div class="row g-2 mb-4">
+
+        <div class="col-md-4">
+            <div class="card text-center p-3 shadow-sm">
+                <i class="bi bi-leaf-fill text-success fs-3"></i>
+                <h6 class="fw-bold mt-2">100% Orgánico</h6>
+                <p class="small">
+                    Todas nuestras frutas son cultivadas sin pesticidas ni químicos dañinos.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center p-3 shadow-sm">
+                <i class="bi bi-truck text-success fs-3"></i>
+                <h6 class="fw-bold mt-2">Entrega Rápida</h6>
+                <p class="small">
+                    Entregamos en menos de 48 horas para asegurar la máxima frescura.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card text-center p-3 shadow-sm">
+                <i class="bi bi-award-fill text-success fs-3"></i>
+                <h6 class="fw-bold mt-2">Calidad Garantizada</h6>
+                <p class="small">
+                    Si no estás satisfecho con nuestros productos, te devolvemos tu dinero.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

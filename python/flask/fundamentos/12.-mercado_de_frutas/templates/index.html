@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado de Frutas</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-success">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+            <i class="bi bi-apple"></i> Mercado de Frutas
+        </a>
+
+        <div>
+            <a class="text-white text-decoration-none me-3" href="{{ url_for('index') }}">Inicio</a>
+            <a class="text-white text-decoration-none" href="{{ url_for('catalogo') }}">Catálogo</a>
+        </div>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="container text-center text-white">
+        <h1>Frutas Frescas a Tu Puerta</h1>
+        <p>Selecciona tus frutas favoritas y realiza tu pedido</p>
+    </div>
+</header>
+
+<form action="{{ url_for('checkout') }}" method="POST">
+
+    <div class="container mt-4 mb-5">
+        <div class="row g-3">
+
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+
+                    <div class="card-header">
+                        <h5 class="mb-0">Selecciona tus frutas</h5>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row g-2">
+
+                            {% for fruta in frutas %}
+
+                            <div class="col-md-6">
+                                <div class="card fruta-card h-100">
+
+                                    <div class="fruta-imagen">
+                                        <img
+                                            src="{{ url_for('static', filename='images/' + fruta.imagen) }}"
+                                            alt="{{ fruta.nombre }}"
+                                        >
+                                    </div>
+
+                                    <div class="card-body p-2">
+
+                                        <h6 class="fw-bold mb-1">
+                                            {{ fruta.nombre }}
+                                        </h6>
+
+                                        <div class="text-success fw-bold mb-1">
+                                            ${{ fruta.precio }}
+                                        </div>
+
+                                        <p class="descripcion">
+                                            {{ fruta.descripcion }}
+                                        </p>
+
+                                    </div>
+
+                                    <div class="card-footer bg-white p-2">
+                                        <input
+                                            type="number"
+                                            class="form-control form-control-sm"
+                                            name="{{ fruta.nombre }}"
+                                            value="0"
+                                            min="0"
+                                        >
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+
+                <div class="card shadow-sm">
+
+                    <div class="card-header">
+                        <h5 class="mb-0">Información de Contacto</h5>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="mb-3">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Dirección de entrega</label>
+                            <textarea class="form-control" name="direccion" rows="3" required></textarea>
+                        </div>
+
+                        <div class="resumen">
+                            <strong>Total de frutas:</strong> Se calcula en el pedido.
+                            <br>
+                            <strong>Total a pagar:</strong> Se calcula en el pedido.
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-cart-fill"></i>
+                            Crear Orden
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</form>
+
+</body>
+</html>

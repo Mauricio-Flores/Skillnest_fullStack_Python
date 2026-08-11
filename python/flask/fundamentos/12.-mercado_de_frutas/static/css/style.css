@@ -1,0 +1,159 @@
+body {
+    background: #f5f6f7;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.navbar {
+    min-height: 34px;
+    padding: 4px 0;
+}
+
+.navbar-brand {
+    font-size: 14px;
+}
+
+.hero {
+    height: 195px;
+    background: #858585;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero h1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 11px;
+}
+
+.fruta-card {
+    overflow: hidden;
+    background: #f8f9fa;
+}
+
+.fruta-imagen {
+    height: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fruta-imagen img {
+    width: 110px;
+    height: 90px;
+    object-fit: contain;
+}
+
+.descripcion {
+    font-size: 8px;
+    margin: 0;
+    color: #555;
+}
+
+.resumen {
+    font-size: 9px;
+    margin-bottom: 10px;
+}
+
+.catalogo-hero {
+    background: #858585;
+    height: 112px;
+    color: white;
+    text-align: center;
+    padding-top: 25px;
+}
+
+.catalogo-hero h1 {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.catalogo-hero p {
+    font-size: 11px;
+}
+
+.catalogo-container {
+    max-width: 670px;
+    margin-top: 23px;
+}
+
+.catalogo-card {
+    overflow: hidden;
+}
+
+.catalogo-card img {
+    height: 130px;
+    object-fit: contain;
+}
+
+.catalogo-info {
+    background: #555;
+    color: white;
+    padding: 5px 7px;
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.catalogo-info span {
+    color: #ffc107;
+}
+
+.checkout-container {
+    max-width: 610px;
+    margin-top: 24px;
+    margin-bottom: 30px;
+}
+
+.checkout-header {
+    background: #198f55;
+    padding: 8px;
+}
+
+.checkout-header h2 {
+    font-size: 18px;
+    margin: 0;
+}
+
+.checkout-header p {
+    font-size: 9px;
+    margin: 0;
+}
+
+.check {
+    background: white;
+    color: #198f55;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin: auto;
+    font-size: 18px;
+}
+
+.checkout-img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.delivery-info {
+    border: 1px solid #eee;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.delivery-info strong {
+    font-size: 10px;
+}
+
+.delivery-info small {
+    font-size: 8px;
+}

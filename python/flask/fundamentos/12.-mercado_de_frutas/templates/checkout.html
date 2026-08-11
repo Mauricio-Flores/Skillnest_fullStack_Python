@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido Confirmado</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<nav class="navbar navbar-dark bg-success">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
+            <i class="bi bi-apple"></i> Mercado de Frutas
+        </a>
+
+        <div>
+            <a class="text-white text-decoration-none me-3" href="{{ url_for('index') }}">Inicio</a>
+            <a class="text-white text-decoration-none" href="{{ url_for('catalogo') }}">Catálogo</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container checkout-container">
+
+    <div class="card shadow">
+
+        <div class="checkout-header text-center text-white">
+
+            <div class="check">
+                <i class="bi bi-check"></i>
+            </div>
+
+            <h2>¡Pedido Confirmado!</h2>
+            <p>Gracias por tu compra</p>
+
+        </div>
+
+        <div class="card-body">
+
+            <h6 class="text-success fw-bold">
+                Información del Cliente
+            </h6>
+
+            <div class="row small mb-3">
+
+                <div class="col-md-6">
+                    <strong>Nombre:</strong> {{ nombre }}
+                    <br>
+                    <strong>Email:</strong> {{ email }}
+                </div>
+
+                <div class="col-md-6">
+                    <strong>Dirección de entrega:</strong><br>
+                    {{ direccion }}
+                </div>
+
+            </div>
+
+            <h6 class="text-success fw-bold">
+                Detalle del Pedido
+            </h6>
+
+            <div class="alert alert-info text-center py-2">
+                <strong>
+                    Total de frutas en tu pedido: {{ total_frutas }}
+                </strong>
+            </div>
+
+            <table class="table table-sm small">
+
+                <thead>
+                    <tr>
+                        <th>Fruta</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for item in pedido %}
+
+                    <tr>
+
+                        <td>
+                            <img
+                                src="{{ url_for('static', filename='images/' + item.imagen) }}"
+                                class="checkout-img"
+                                alt="{{ item.nombre }}"
+                            >
+                            {{ item.nombre }}
+                        </td>
+
+                        <td>${{ item.precio }}</td>
+
+                        <td>{{ item.cantidad }}</td>
+
+                        <td>${{ "%.1f"|format(item.subtotal) }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+                <tfoot>
+
+                    <tr>
+                        <th colspan="3" class="text-end">Total:</th>
+                        <th>${{ "%.1f"|format(total) }}</th>
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+            <div class="delivery-info">
+
+                <i class="bi bi-truck text-success fs-3"></i>
+
+                <div>
+                    <strong>Información de entrega</strong>
+                    <br>
+                    <small>
+                        Tu pedido será entregado en un plazo de 24-48 horas.
+                    </small>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-3">
+
+                <a href="{{ url_for('index') }}" class="btn btn-primary btn-sm">
+                    <i class="bi bi-house-fill"></i>
+                    Volver a la tienda
+                </a>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
