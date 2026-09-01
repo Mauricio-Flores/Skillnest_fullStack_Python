@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de visitas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <main class="panel-principal">
+        <header class="encabezado">
+            <div>
+                <p class="encabezado__tag">Panel de control</p>
+                <h1>Registro de visitas</h1>
+                <p class="encabezado__descripcion">Administra la actividad de tu sesión de forma rápida y sencilla.</p>
+            </div>
+        </header>
+
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% if mensajes %}
+        <div class="alertas" aria-live="polite">
+            {% for categoria, mensaje in mensajes %}
+            <p class="alerta alerta--{{ categoria }}">{{ mensaje }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <section class="estadisticas" aria-label="Resumen de actividad">
+            <article class="tarjeta-estadistica">
+                <span class="tarjeta-estadistica__titulo">Visitas registradas</span>
+                <strong class="tarjeta-estadistica__valor">{{ visitas }}</strong>
+                <span class="tarjeta-estadistica__detalle">Sesiones contabilizadas</span>
+            </article>
+            <article class="tarjeta-estadistica">
+                <span class="tarjeta-estadistica__titulo">Veces reiniciado</span>
+                <strong class="tarjeta-estadistica__valor">{{ reinicios }}</strong>
+                <span class="tarjeta-estadistica__detalle">Reinicios realizados</span>
+            </article>
+        </section>
+
+        <section class="panel-acciones">
+            <div class="seccion-titulo">
+                <span class="seccion-titulo__linea"></span>
+                <h2>Acciones disponibles</h2>
+            </div>
+
+            <form action="{{ url_for('aumentar_dos') }}" method="post">
+                <button class="accion accion--destacada" type="submit">
+                    <span class="accion__icono">+</span>
+                    <span>
+                        <strong>Sumar 2 visitas</strong>
+                        <small>Incremento rápido del contador</small>
+                    </span>
+                </button>
+            </form>
+
+            <form class="formulario-cantidad" action="{{ url_for('aumentar') }}" method="post">
+                <label for="cantidad">Agregar una cantidad personalizada</label>
+                <div class="formulario-cantidad__fila">
+                    <input id="cantidad" name="cantidad" type="number" min="1" placeholder="Ej. 5" required>
+                    <button class="accion accion--secundaria" type="submit">Agregar</button>
+                </div>
+            </form>
+
+            <form action="{{ url_for('reiniciar') }}" method="post">
+                <button class="accion accion--reinicio" type="submit">
+                    <span>Reiniciar contador</span>
+                    <small>Volver las visitas a 0</small>
+                </button>
+            </form>
+        </section>
+
+        <footer class="pie">
+            <span>Los datos se mantienen durante tu sesión.</span>
+            <a class="enlace-sesion" href="{{ url_for('destruir_sesion') }}">Eliminar sesión</a>
+        </footer>
+    </main>
+</body>
+
+</html>

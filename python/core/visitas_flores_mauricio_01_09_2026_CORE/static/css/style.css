@@ -1,0 +1,252 @@
+/* Diseño simple y profesional en azul */
+
+:root {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1e293b;
+    background: #eef4fb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: #eef4fb;
+}
+
+.panel-principal {
+    width: min(100%, 620px);
+    padding: 36px;
+    background: #ffffff;
+    border: 1px solid #d6e2f0;
+    border-radius: 14px;
+    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.08);
+}
+
+.encabezado {
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.encabezado__icono {
+    margin-bottom: 12px;
+    color: #2563eb;
+    font-size: 2rem;
+}
+
+.encabezado__tag {
+    margin: 0 0 7px;
+    color: #2563eb;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+h1,
+h2 {
+    color: #172554;
+}
+
+h1 {
+    margin: 0 0 10px;
+    font-size: clamp(2rem, 7vw, 2.8rem);
+}
+
+.encabezado__descripcion {
+    margin: 0;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.alertas {
+    margin-bottom: 20px;
+}
+
+.alerta {
+    padding: 12px 14px;
+    border-radius: 8px;
+    line-height: 1.4;
+}
+
+.alerta--success {
+    color: #166534;
+    background: #ecfdf5;
+    border: 1px solid #bbf7d0;
+}
+
+.alerta--error {
+    color: #991b1b;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+}
+
+.estadisticas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.tarjeta-estadistica {
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #dbe7f3;
+    border-radius: 10px;
+    background: #f8fbff;
+}
+
+.tarjeta-estadistica__titulo {
+    display: block;
+    color: #64748b;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.tarjeta-estadistica__valor {
+    display: block;
+    margin: 8px 0;
+    color: #2563eb;
+    font-size: 2.2rem;
+}
+
+.tarjeta-estadistica__detalle {
+    color: #94a3b8;
+    font-size: 0.75rem;
+}
+
+.panel-acciones {
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.seccion-titulo {
+    margin-bottom: 18px;
+}
+
+.seccion-titulo h2 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.accion {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 16px;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.accion:hover {
+    opacity: 0.9;
+}
+
+.accion--destacada {
+    color: #ffffff;
+    background: #2563eb;
+}
+
+.accion--secundaria {
+    color: #ffffff;
+    background: #1d4ed8;
+}
+
+.accion--reinicio {
+    color: #1e40af;
+    background: #eff6ff;
+    border-color: #bfdbfe;
+}
+
+.accion strong,
+.accion small {
+    display: block;
+}
+
+.accion small {
+    margin-top: 3px;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.formulario-cantidad {
+    margin: 14px 0;
+    padding: 18px;
+    border-radius: 9px;
+    background: #f8fafc;
+}
+
+.formulario-cantidad label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.formulario-cantidad__fila {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+}
+
+input {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1px solid #b8c7d9;
+    border-radius: 8px;
+    color: #1e293b;
+    background: #ffffff;
+    font: inherit;
+}
+
+input:focus {
+    border-color: #2563eb;
+    outline: 3px solid #dbeafe;
+}
+
+.pie {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.enlace-sesion {
+    color: #2563eb;
+    font-weight: 700;
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 12px;
+    }
+
+    .panel-principal {
+        padding: 26px 20px;
+    }
+
+    .estadisticas {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario-cantidad__fila {
+        grid-template-columns: 1fr;
+    }
+
+    .pie {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
