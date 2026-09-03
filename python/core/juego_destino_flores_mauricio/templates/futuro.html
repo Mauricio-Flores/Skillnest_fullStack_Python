@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Destino - El Juego del Destino</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="page">
+        <section class="card result-card">
+            <header class="card-header">
+                <div class="symbol">D</div>
+                <h1>Tu Destino ha sido Revelado</h1>
+                <p>Las estrellas han hablado, {{ nombre }}</p>
+            </header>
+
+            <div class="result-content">
+                <section class="prediction">
+                    <div class="prediction-mark">+</div>
+                    <p>{{ prediccion }}</p>
+                </section>
+
+                <div class="details">
+                    <article class="detail">
+                        <h2>Tu color</h2>
+                        <div class="color-preview" title="{{ color }}"></div>
+                        <p>Tu preferencia por <strong>{{ color }}</strong> revela una personalidad única y llena de posibilidades.</p>
+                    </article>
+
+                    <article class="detail">
+                        <h2>Tu animal</h2>
+                        <div class="animal-mark">A</div>
+                        <p>Tu conexión con el <strong>{{ animal }}</strong> representa características que pueden acompañarte en el futuro.</p>
+                    </article>
+                </div>
+
+                <section class="luck">
+                    <h2>Tu número de la suerte</h2>
+                    <div class="luck-number">67</div>
+                    <p>Este número puede acompañarte en momentos importantes.</p>
+                </section>
+
+                <div class="age-message">
+                    A tus {{ edad }} años, estás en un momento ideal para aprovechar nuevas oportunidades.
+                </div>
+
+                <a href="{{ url_for('inicio') }}" class="button secondary">
+                    Consultar de nuevo
+                </a>
+
+                <p class="footer-note">Las estrellas han hablado hoy.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
