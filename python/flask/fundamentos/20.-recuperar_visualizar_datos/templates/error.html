@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Servicio no disponible</title>
+</head>
+
+<body>
+    <main>
+        <p>Error 503</p>
+        <h1>Servicio temporalmente no disponible</h1>
+        <section>
+            <p>No se pudo acceder a la base de datos. Intenta nuevamente mas tarde.</p>
+            <h2>Para ejecutar el proyecto localmente</h2>
+            <ul>
+                <li>Comprueba que el servidor MySQL este encendido.</li>
+                <li>Revisa host, puerto, usuario, clave y base de datos en tu archivo .env.</li>
+                <li>Importa schema.sql y verifica los permisos del usuario MySQL.</li>
+            </ul>
+            <a href="{{ url_for('index') }}">Volver al listado</a>
+        </section>
+    </main>
+</body>
+
+</html>

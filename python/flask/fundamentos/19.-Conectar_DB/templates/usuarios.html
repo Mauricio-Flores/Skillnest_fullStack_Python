@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Usuarios{% endblock %}
+{% block content %}
+<h1>Listado de Usuarios</h1>
+{% if usuarios %}
+<ul>
+    {% for usuario in usuarios %}
+    <li>
+        <p>ID: {{ usuario.id }}</p>
+        <h2>{{ usuario.nombre }}</h2>
+        <dl>
+            <dt>Correo electronico</dt>
+            <dd>{{ usuario.email }}</dd>
+            <dt>Edad</dt>
+            <dd>{{ usuario.edad }} a&ntilde;os</dd>
+            <dt>Fecha de creacion</dt>
+            <dd>{{ usuario.created_at if usuario.created_at else 'Sin fecha' }}</dd>
+            <dt>Ultima actualizacion</dt>
+            <dd>{{ usuario.updated_at if usuario.updated_at else 'Sin fecha' }}</dd>
+        </dl>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No existen usuarios registrados.</p>
+{% endif %}
+{% endblock %}

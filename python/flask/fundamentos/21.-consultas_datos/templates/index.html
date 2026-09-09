@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Todas las mascotas{% endblock %}
+{% block content %}
+<h1>Todas las mascotas</h1>
+<ul>
+    {% for mascota in mascotas %}
+    <li>
+        <h2><a href="{{ url_for('mostrar_mascota', id=mascota.id) }}">{{ mascota.nombre }}</a></h2>
+        <p>Tipo: {{ mascota.tipo }}</p>
+        <p>Color: {{ mascota.color }}</p>
+    </li>
+    {% else %}
+    <li>No existen mascotas registradas.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

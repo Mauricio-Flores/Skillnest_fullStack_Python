@@ -1,0 +1,43 @@
+CREATE DATABASE IF NOT EXISTS primera_flask CHARACTER SET utf8mb4;
+USE primera_flask;
+SET NAMES utf8mb4;
+
+CREATE TABLE IF NOT EXISTS mascotas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    tipo VARCHAR(100) NOT NULL,
+    color VARCHAR(100) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) CHARACTER SET utf8mb4;
+
+-- No reemplazar registros existentes ni duplicar las mascotas de otros ejercicios.
+INSERT INTO mascotas (nombre, tipo, color)
+SELECT 'Firulais', 'Perro', 'Café'
+WHERE NOT EXISTS (
+    SELECT 1 FROM mascotas WHERE nombre = 'Firulais' AND tipo = 'Perro' AND color = 'Café'
+);
+
+INSERT INTO mascotas (nombre, tipo, color)
+SELECT 'Michi', 'Gato', 'Negro'
+WHERE NOT EXISTS (
+    SELECT 1 FROM mascotas WHERE nombre = 'Michi' AND tipo = 'Gato' AND color = 'Negro'
+);
+
+INSERT INTO mascotas (nombre, tipo, color)
+SELECT 'Luna', 'Perro', 'Blanco'
+WHERE NOT EXISTS (
+    SELECT 1 FROM mascotas WHERE nombre = 'Luna' AND tipo = 'Perro' AND color = 'Blanco'
+);
+
+INSERT INTO mascotas (nombre, tipo, color)
+SELECT 'Nala', 'Gato', 'Naranjo'
+WHERE NOT EXISTS (
+    SELECT 1 FROM mascotas WHERE nombre = 'Nala' AND tipo = 'Gato' AND color = 'Naranjo'
+);
+
+INSERT INTO mascotas (nombre, tipo, color)
+SELECT 'Coco', 'Conejo', 'Blanco'
+WHERE NOT EXISTS (
+    SELECT 1 FROM mascotas WHERE nombre = 'Coco' AND tipo = 'Conejo' AND color = 'Blanco'
+);

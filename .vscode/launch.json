@@ -1,0 +1,44 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flask 19 - Conectar DB (5019)",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/python/flask/fundamentos/19.-Conectar_DB/.venv/Scripts/python.exe",
+            "module": "flask",
+            "args": ["--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5019"],
+            "cwd": "${workspaceFolder}/python/flask/fundamentos/19.-Conectar_DB",
+            "envFile": "${workspaceFolder}/python/flask/fundamentos/19.-Conectar_DB/.env",
+            "console": "integratedTerminal",
+            "jinja": true,
+            "justMyCode": true
+        },
+        {
+            "name": "Flask 20 - Visualizar datos (5020)",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/python/flask/fundamentos/20.-recuperar_visualizar_datos/.venv/Scripts/python.exe",
+            "module": "flask",
+            "args": ["--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5020"],
+            "cwd": "${workspaceFolder}/python/flask/fundamentos/20.-recuperar_visualizar_datos",
+            "envFile": "${workspaceFolder}/python/flask/fundamentos/20.-recuperar_visualizar_datos/.env",
+            "console": "integratedTerminal",
+            "jinja": true,
+            "justMyCode": true
+        },
+        {
+            "name": "Flask 21 - Consultas (5021)",
+            "type": "debugpy",
+            "request": "launch",
+            "python": "${workspaceFolder}/python/flask/fundamentos/21.-consultas_datos/.venv/Scripts/python.exe",
+            "module": "flask",
+            "args": ["--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5021"],
+            "cwd": "${workspaceFolder}/python/flask/fundamentos/21.-consultas_datos",
+            "envFile": "${workspaceFolder}/python/flask/fundamentos/21.-consultas_datos/.env",
+            "console": "integratedTerminal",
+            "jinja": true,
+            "justMyCode": true
+        }
+    ]
+}

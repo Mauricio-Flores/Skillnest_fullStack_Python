@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Error {{ codigo }}{% endblock %}
+{% block content %}
+<p>Error {{ codigo }}</p>
+<h1>{{ mensaje }}</h1>
+{% if codigo == 503 %}
+<p>Comprueba que MySQL este iniciado, que hayas importado schema.sql y que el usuario tenga permisos de lectura.</p>
+<p>Revisa el host, puerto, usuario, clave y base de datos en tu archivo .env. No compartas tus credenciales.</p>
+{% else %}
+<p>Revisa el identificador o nombre solicitado y vuelve al listado.</p>
+{% endif %}
+<a href="{{ url_for('index') }}">Volver al listado</a>
+{% endblock %}

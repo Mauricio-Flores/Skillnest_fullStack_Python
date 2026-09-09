@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Las mascotas</title>
+</head>
+
+<body>
+    <main>
+        <h1>Las mascotas</h1>
+        {% if todas_mascotas %}
+        <ul>
+            {% for una_mascota in todas_mascotas %}
+            <li>
+                <h2>{{ una_mascota.nombre }}</h2>
+                <dl>
+                    <dt>ID</dt>
+                    <dd>{{ una_mascota.id }}</dd>
+                    <dt>Tipo</dt>
+                    <dd>{{ una_mascota.tipo }}</dd>
+                    <dt>Color</dt>
+                    <dd>{{ una_mascota.color }}</dd>
+                    <dt>Creado</dt>
+                    <dd>{% if una_mascota.created_at %}<time datetime="{{ una_mascota.created_at.isoformat() }}">{{
+                            una_mascota.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</time>{% else %}Sin fecha{% endif %}
+                    </dd>
+                    <dt>Actualizado</dt>
+                    <dd>{% if una_mascota.updated_at %}<time datetime="{{ una_mascota.updated_at.isoformat() }}">{{
+                            una_mascota.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</time>{% else %}Sin fecha{% endif %}
+                    </dd>
+                </dl>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No existen mascotas registradas.</p>
+        {% endif %}
+    </main>
+</body>
+
+</html>

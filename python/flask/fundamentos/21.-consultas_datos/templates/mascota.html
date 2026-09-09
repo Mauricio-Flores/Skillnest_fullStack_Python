@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}{{ mascota.nombre }}{% endblock %}
+{% block content %}
+<h1>{{ mascota.nombre }}</h1>
+<dl>
+    <dt>ID</dt><dd>{{ mascota.id }}</dd>
+    <dt>Nombre</dt><dd>{{ mascota.nombre }}</dd>
+    <dt>Tipo</dt><dd>{{ mascota.tipo }}</dd>
+    <dt>Color</dt><dd>{{ mascota.color }}</dd>
+    <dt>Fecha de creacion</dt><dd>{{ mascota.created_at if mascota.created_at is not none else 'Sin fecha' }}</dd>
+    <dt>Ultima actualizacion</dt><dd>{{ mascota.updated_at if mascota.updated_at is not none else 'Sin fecha' }}</dd>
+</dl>
+<p><a href="{{ url_for('buscar_nombre', nombre=mascota.nombre) }}">Consultar por nombre</a></p>
+<p><a href="{{ url_for('index') }}">Volver al listado</a></p>
+{% endblock %}

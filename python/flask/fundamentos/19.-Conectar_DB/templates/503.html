@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Servicio no disponible{% endblock %}
+{% block content %}
+<p>Error 503</p>
+<h1>El registro no esta disponible.</h1>
+<div>
+    <p>No pudimos consultar la base de datos. Intenta nuevamente mas tarde.</p>
+    <h2>Si estas configurando el proyecto</h2>
+    <ul>
+        <li>Comprueba que el servidor MySQL este iniciado y accesible.</li>
+        <li>Revisa host, puerto, usuario, clave y base de datos en tu archivo .env local.</li>
+        <li>Importa schema.sql en Workbench y verifica los permisos del usuario MySQL.</li>
+    </ul>
+    <p>No compartas credenciales ni el contenido de .env.</p>
+</div>
+<a href="{{ url_for('index') }}">Volver a intentar</a>
+{% endblock %}

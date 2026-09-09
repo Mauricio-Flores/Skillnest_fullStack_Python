@@ -1,0 +1,32 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Flask 19 - Ejecutar",
+            "type": "process",
+            "command": "${workspaceFolder}/python/flask/fundamentos/19.-Conectar_DB/.venv/Scripts/python.exe",
+            "args": ["-m", "flask", "--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5019"],
+            "options": {"cwd": "${workspaceFolder}/python/flask/fundamentos/19.-Conectar_DB"},
+            "problemMatcher": [],
+            "presentation": {"reveal": "always", "panel": "dedicated"}
+        },
+        {
+            "label": "Flask 20 - Ejecutar",
+            "type": "process",
+            "command": "${workspaceFolder}/python/flask/fundamentos/20.-recuperar_visualizar_datos/.venv/Scripts/python.exe",
+            "args": ["-m", "flask", "--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5020"],
+            "options": {"cwd": "${workspaceFolder}/python/flask/fundamentos/20.-recuperar_visualizar_datos"},
+            "problemMatcher": [],
+            "presentation": {"reveal": "always", "panel": "dedicated"}
+        },
+        {
+            "label": "Flask 21 - Ejecutar",
+            "type": "process",
+            "command": "${workspaceFolder}/python/flask/fundamentos/21.-consultas_datos/.venv/Scripts/python.exe",
+            "args": ["-m", "flask", "--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5021"],
+            "options": {"cwd": "${workspaceFolder}/python/flask/fundamentos/21.-consultas_datos"},
+            "problemMatcher": [],
+            "presentation": {"reveal": "always", "panel": "dedicated"}
+        }
+    ]
+}
