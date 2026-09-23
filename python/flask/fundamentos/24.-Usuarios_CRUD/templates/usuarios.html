@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+</head>
+
+<body>
+
+<h1>Lista de usuarios</h1>
+
+<a href="{{ url_for('nuevo') }}">Crear usuario</a>
+
+{% for usuario in usuarios %}
+
+<p>
+    {{ usuario.nombre }}
+    {{ usuario.apellido }}
+    <br>
+    {{ usuario.email }}
+</p>
+
+<hr>
+
+{% endfor %}
+
+</body>
+</html>

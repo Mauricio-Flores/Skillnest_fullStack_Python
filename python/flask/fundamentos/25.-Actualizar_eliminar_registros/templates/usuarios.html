@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Usuarios</title>
+</head>
+<body>
+
+<h1>Usuarios registrados</h1>
+
+{% for usuario in usuarios %}
+<p>
+{{ usuario.nombre }} {{ usuario.apellido }}<br>
+{{ usuario.email }}
+</p>
+
+<a href="{{ url_for('ver', id=usuario.id) }}">Ver</a>
+<a href="{{ url_for('editar', id=usuario.id) }}">Editar</a>
+<a href="{{ url_for('eliminar', id=usuario.id) }}">Eliminar</a>
+<hr>
+
+{% endfor %}
+
+</body>
+</html>

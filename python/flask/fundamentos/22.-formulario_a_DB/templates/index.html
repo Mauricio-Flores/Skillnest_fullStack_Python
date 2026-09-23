@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de animales</title>
+</head>
+
+<body>
+
+    <h1>Animales registrados</h1>
+
+
+    {% if animales %}
+
+        {% for animal in animales %}
+
+            <p>
+                <strong>Nombre:</strong>
+                {{ animal.nombre_animal }}
+
+                <br>
+
+                <strong>Categoría:</strong>
+                {{ animal.categoria }}
+
+                <br>
+
+                <strong>Detalle:</strong>
+                {{ animal.detalle }}
+            </p>
+
+            <hr>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>
+            No hay animales registrados.
+        </p>
+
+    {% endif %}
+
+
+
+    <h2>Agregar animal</h2>
+
+
+    <form action="{{ url_for('nuevo_animal') }}" method="POST">
+
+        <label for="nombre">
+            Nombre:
+        </label>
+
+        <input 
+            type="text"
+            id="nombre"
+            name="nombre"
+            required
+        >
+
+        <br><br>
+
+
+        <label for="tipo">
+            Categoría:
+        </label>
+
+        <input
+            type="text"
+            id="tipo"
+            name="tipo"
+            required
+        >
+
+        <br><br>
+
+
+        <label for="color">
+            Detalle:
+        </label>
+
+        <input
+            type="text"
+            id="color"
+            name="color"
+            required
+        >
+
+        <br><br>
+
+
+        <button type="submit">
+            Guardar animal
+        </button>
+
+
+    </form>
+
+
+</body>
+
+</html>

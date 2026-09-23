@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Detalle</title>
+</head>
+<body>
+
+<h1>Información del usuario</h1>
+
+<p>{{ usuario.nombre }} {{ usuario.apellido }}</p>
+<p>{{ usuario.email }}</p>
+
+<a href="{{ url_for('lista') }}">Volver</a>
+
+</body>
+</html>

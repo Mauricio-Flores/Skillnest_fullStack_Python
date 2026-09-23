@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Editar</title>
+</head>
+<body>
+
+<h1>Editar usuario</h1>
+
+<form action="{{ url_for('actualizar', id=usuario.id) }}" method="POST">
+
+<input name="nombre" value="{{ usuario.nombre }}">
+<input name="apellido" value="{{ usuario.apellido }}">
+<input name="email" value="{{ usuario.email }}">
+
+<button type="submit">Guardar</button>
+
+</form>
+
+</body>
+</html>

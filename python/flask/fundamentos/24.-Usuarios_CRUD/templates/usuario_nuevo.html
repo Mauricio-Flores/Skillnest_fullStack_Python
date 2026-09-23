@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo usuario</title>
+</head>
+
+<body>
+
+<h1>Nuevo usuario</h1>
+
+<form action="{{ url_for('guardar') }}" method="POST">
+
+<input type="text" name="nombre" placeholder="Nombre">
+
+<input type="text" name="apellido" placeholder="Apellido">
+
+<input type="email" name="email" placeholder="Correo">
+
+<button type="submit">
+Guardar
+</button>
+
+</form>
+
+</body>
+</html>
