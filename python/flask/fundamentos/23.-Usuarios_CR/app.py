@@ -5,6 +5,10 @@ app = Flask(__name__)
 
 @app.route("/usuarios")
 def listar_usuarios():
+    usuarios = Usuario.listar()
+    return render_template("usuarios.html", usuarios=usuarios)
+
+@app.route("/usuarios/nuevo")
 def formulario_usuario():
     return render_template("usuario_nuevo.html")
 
