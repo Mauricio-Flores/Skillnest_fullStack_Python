@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ autor.nombre }}</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="container py-5">
+
+        <!-- ==================================================
+             ENCABEZADO
+        =================================================== -->
+
+        <div class="page-header">
+
+            <div>
+                <h1>{{ autor.nombre }}</h1>
+                <p class="text-muted">
+                    Libros pertenecientes a este autor.
+                </p>
+            </div>
+
+            <div>
+                <a href="{{ url_for('autores') }}" class="btn btn-outline-secondary">
+                    Autores
+                </a>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">
+                    Crear Libro
+                </a>
+            </div>
+
+        </div>
+
+        <!-- ==================================================
+             LIBROS RELACIONADOS
+        =================================================== -->
+
+        {% if autor.libros %}
+
+            <div class="row g-4">
+
+                {% for libro in autor.libros %}
+
+                    <div class="col-12 col-md-6 col-lg-4">
+
+                        <div class="card libro-card h-100 shadow-sm">
+
+                            <div class="card-body">
+
+                                <h2 class="h4">Libro #{{ libro.id }}</h2>
+
+                                <p>
+                                    <strong>Título:</strong>
+                                    {{ libro.titulo }}
+                                </p>
+
+                                <p>
+                                    <strong>Género:</strong>
+                                    {{ libro.genero }}
+                                </p>
+
+                                <p>
+                                    <strong>Editorial:</strong>
+                                    {{ libro.editorial }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% else %}
+
+            <div class="alert alert-info">
+                Este autor todavía no tiene libros registrados.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
