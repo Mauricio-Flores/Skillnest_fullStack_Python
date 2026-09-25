@@ -1,4 +1,3 @@
-import os
 import unittest
 from datetime import datetime
 from unittest.mock import MagicMock, patch
@@ -7,7 +6,7 @@ import pymysql
 
 from app import app
 from mascota import Mascota
-from mysqlconnection import MySQLConnection
+from mysqlconnection import MySQLConnection, connectToMySQL
 
 
 def fila(**cambios):
@@ -74,7 +73,7 @@ class AppTests(unittest.TestCase):
                 self.assertEqual(response.mimetype, "text/html")
                 html = response.get_data(as_text=True)
                 self.assertIn("schema.sql", html)
-                self.assertIn(".env", html)
+                self.assertIn("mysqlconnection.py", html)
                 self.assertNotIn("No existen", html)
 
     def test_connection_failure_does_not_expose_secret(self):
@@ -90,6 +89,7 @@ class AppTests(unittest.TestCase):
         data = fila()
         self.query.return_value = [data]
         mascotas = Mascota.get_all()
+        self.connect.assert_called_once_with("primera_flask")
         self.query.assert_called_once_with("SELECT * FROM mascotas ORDER BY id;")
         self.assertIsInstance(mascotas[0], Mascota)
         self.assertEqual(vars(mascotas[0]), data)
@@ -113,28 +113,25 @@ class ConnectionTests(unittest.TestCase):
         self.context = self.connection.cursor.return_value
         self.cursor = self.context.__enter__.return_value
 
-    def test_default_configuration(self):
-        with patch.dict(os.environ, {}, clear=True):
-            MySQLConnection()
+    def test_direct_configuration(self):
+        MySQLConnection("primera_flask")
+        password = self.connect.call_args.kwargs["password"]
+        self.assertIsInstance(password, str)
         self.connect.assert_called_once_with(
-            host="127.0.0.1", port=3306, user="skillnest", password="",
+            host="localhost", port=3306, user="root", password=password,
             database="primera_flask", charset="utf8mb4",
             cursorclass=pymysql.cursors.DictCursor, autocommit=True, connect_timeout=5,
         )
 
-    def test_environment_and_database_argument(self):
-        with patch.dict(os.environ, {"MYSQL_HOST": "db.local", "MYSQL_PORT": "3307",
-                                    "MYSQL_USER": "lector", "MYSQL_PASSWORD": "prueba",
-                                    "MYSQL_DATABASE": "otra"}, clear=True):
+    def test_required_database_argument(self):
+        with self.assertRaises(TypeError):
             MySQLConnection()
-            self.assertEqual(self.connect.call_args.kwargs["database"], "otra")
-            MySQLConnection("explicita")
-        config = self.connect.call_args.kwargs
-        self.assertEqual(config["database"], "explicita")
-        self.assertEqual(config["host"], "db.local")
-        self.assertEqual(config["port"], 3307)
-        self.assertEqual(config["user"], "lector")
-        self.assertEqual(config["password"], "prueba")
+        with self.assertRaises(TypeError):
+            connectToMySQL()
+        self.connect.assert_not_called()
+        for db in ("primera_flask", "explicita"):
+            self.assertIsInstance(connectToMySQL(db), MySQLConnection)
+            self.assertEqual(self.connect.call_args.kwargs["database"], db)
 
     def test_return_values_parameters_and_close_order(self):
         self.cursor.fetchall.return_value = (fila(),)
@@ -151,7 +148,7 @@ class ConnectionTests(unittest.TestCase):
         ):
             with self.subTest(sql=sql):
                 events.reset_mock()
-                result = MySQLConnection().query_db(sql, params)
+                result = MySQLConnection("primera_flask").query_db(sql, params)
                 self.assertEqual(result, expected)
                 self.cursor.execute.assert_called_with(sql, params)
                 self.assertEqual([call[0] for call in events.mock_calls], ["cursor_exit", "close"])
@@ -159,7 +156,7 @@ class ConnectionTests(unittest.TestCase):
     def test_query_error_logs_generic_message_and_closes(self):
         self.cursor.execute.side_effect = pymysql.MySQLError("secret-value SQL")
         with self.assertLogs("mysqlconnection", level="ERROR") as logs:
-            result = MySQLConnection().query_db("SELECT secret-value", {"key": "secret-value"})
+            result = MySQLConnection("primera_flask").query_db("SELECT secret-value", {"key": "secret-value"})
         self.assertIs(result, False)
         self.assertNotIn("secret-value", " ".join(logs.output))
         self.assertNotIn("SQL", " ".join(logs.output))
@@ -169,7 +166,7 @@ class ConnectionTests(unittest.TestCase):
     def test_cursor_open_error_also_closes(self):
         self.connection.cursor.side_effect = pymysql.MySQLError("private")
         with self.assertLogs("mysqlconnection", level="ERROR"):
-            self.assertIs(MySQLConnection().query_db("SELECT 1"), False)
+            self.assertIs(MySQLConnection("primera_flask").query_db("SELECT 1"), False)
         self.connection.close.assert_called_once()
 
 

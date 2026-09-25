@@ -1,34 +1,21 @@
 import logging
-import os
-from pathlib import Path
 
 import pymysql
-from dotenv import load_dotenv
 
 
-load_dotenv(Path(__file__).with_name('.env'))
 logger = logging.getLogger(__name__)
 
 
 class MySQLConnection:
     """Abre una conexion para una sola consulta."""
 
-    def __init__(self, db=None):
-        try:
-            port = int(os.environ.get("MYSQL_PORT", "3306"))
-            if not 1 <= port <= 65535:
-                raise ValueError
-        except ValueError:
-            raise pymysql.MySQLError("Configuracion de MySQL invalida.") from None
-
+    def __init__(self, db):
         self.connection = pymysql.connect(
-            host=os.environ.get("MYSQL_HOST", "127.0.0.1"),
-            port=port,
-            user=os.environ.get("MYSQL_USER", "skillnest"),
-            password=os.environ.get("MYSQL_PASSWORD", ""),
-            database=db if db is not None else os.environ.get(
-                "MYSQL_DATABASE", "primera_flask"
-            ),
+            host='localhost',
+            port=3306,
+            user='root',
+            password='1234',
+            database=db,
             charset="utf8mb4",
             cursorclass=pymysql.cursors.DictCursor,
             autocommit=True,
@@ -54,5 +41,5 @@ class MySQLConnection:
             self.connection.close()
 
 
-def connectToMySQL(db=None):
+def connectToMySQL(db):
     return MySQLConnection(db)

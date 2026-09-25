@@ -6,7 +6,10 @@
             "type": "process",
             "command": "${workspaceFolder}/python/flask/fundamentos/19.-Conectar_DB/.venv/Scripts/python.exe",
             "args": ["-m", "flask", "--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5019"],
-            "options": {"cwd": "${workspaceFolder}/python/flask/fundamentos/19.-Conectar_DB"},
+            "options": {
+                "cwd": "${workspaceFolder}/python/flask/fundamentos/19.-Conectar_DB",
+                "env": {"FLASK_SKIP_DOTENV": "1"}
+            },
             "problemMatcher": [],
             "presentation": {"reveal": "always", "panel": "dedicated"}
         },
@@ -15,7 +18,10 @@
             "type": "process",
             "command": "${workspaceFolder}/python/flask/fundamentos/20.-recuperar_visualizar_datos/.venv/Scripts/python.exe",
             "args": ["-m", "flask", "--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5020"],
-            "options": {"cwd": "${workspaceFolder}/python/flask/fundamentos/20.-recuperar_visualizar_datos"},
+            "options": {
+                "cwd": "${workspaceFolder}/python/flask/fundamentos/20.-recuperar_visualizar_datos",
+                "env": {"FLASK_SKIP_DOTENV": "1"}
+            },
             "problemMatcher": [],
             "presentation": {"reveal": "always", "panel": "dedicated"}
         },
@@ -24,7 +30,10 @@
             "type": "process",
             "command": "${workspaceFolder}/python/flask/fundamentos/21.-consultas_datos/.venv/Scripts/python.exe",
             "args": ["-m", "flask", "--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5021"],
-            "options": {"cwd": "${workspaceFolder}/python/flask/fundamentos/21.-consultas_datos"},
+            "options": {
+                "cwd": "${workspaceFolder}/python/flask/fundamentos/21.-consultas_datos",
+                "env": {"FLASK_SKIP_DOTENV": "1"}
+            },
             "problemMatcher": [],
             "presentation": {"reveal": "always", "panel": "dedicated"}
         }

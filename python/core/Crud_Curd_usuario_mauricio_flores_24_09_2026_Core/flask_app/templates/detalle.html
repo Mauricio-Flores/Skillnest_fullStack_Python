@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="contenedor formulario">
+        <h1>Usuario {{ usuario.id }}</h1>
+        <p><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+        <p><strong>Apellido:</strong> {{ usuario.apellido }}</p>
+        <p><strong>Email:</strong> {{ usuario.email }}</p>
+        <p><strong>Creado:</strong> {{ usuario.created_at }}</p>
+        <p><strong>Actualizado:</strong> {{ usuario.updated_at }}</p>
+
+        <div class="acciones-formulario">
+            <a href="{{ url_for('editar', id=usuario.id) }}">Editar</a>
+            <a href="{{ url_for('borrar', id=usuario.id) }}">Eliminar</a>
+            <a href="{{ url_for('usuarios') }}">Volver</a>
+        </div>
+    </main>
+</body>
+</html>

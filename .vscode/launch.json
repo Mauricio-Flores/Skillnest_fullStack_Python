@@ -9,7 +9,7 @@
             "module": "flask",
             "args": ["--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5019"],
             "cwd": "${workspaceFolder}/python/flask/fundamentos/19.-Conectar_DB",
-            "envFile": "${workspaceFolder}/python/flask/fundamentos/19.-Conectar_DB/.env",
+            "env": {"FLASK_SKIP_DOTENV": "1"},
             "console": "integratedTerminal",
             "jinja": true,
             "justMyCode": true
@@ -22,7 +22,7 @@
             "module": "flask",
             "args": ["--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5020"],
             "cwd": "${workspaceFolder}/python/flask/fundamentos/20.-recuperar_visualizar_datos",
-            "envFile": "${workspaceFolder}/python/flask/fundamentos/20.-recuperar_visualizar_datos/.env",
+            "env": {"FLASK_SKIP_DOTENV": "1"},
             "console": "integratedTerminal",
             "jinja": true,
             "justMyCode": true
@@ -35,7 +35,7 @@
             "module": "flask",
             "args": ["--app", "app", "run", "--no-debugger", "--no-reload", "--port", "5021"],
             "cwd": "${workspaceFolder}/python/flask/fundamentos/21.-consultas_datos",
-            "envFile": "${workspaceFolder}/python/flask/fundamentos/21.-consultas_datos/.env",
+            "env": {"FLASK_SKIP_DOTENV": "1"},
             "console": "integratedTerminal",
             "jinja": true,
             "justMyCode": true

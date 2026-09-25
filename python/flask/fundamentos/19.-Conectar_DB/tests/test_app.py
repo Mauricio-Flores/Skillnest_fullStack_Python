@@ -6,7 +6,7 @@ import pymysql
 
 from app import app
 from mascota import Mascota
-from mysqlconnection import MySQLConnection
+from mysqlconnection import MySQLConnection, connectToMySQL
 from usuario import Usuario
 
 
@@ -80,7 +80,7 @@ class AppTests(unittest.TestCase):
                     self.assertEqual(response.status_code, 503)
                     self.assertEqual(response.mimetype, "text/html")
                     self.assertIn(b"schema.sql", response.data)
-                    self.assertIn(b".env", response.data)
+                    self.assertIn(b"mysqlconnection.py", response.data)
                     self.assertNotIn(b"clave-super-secreta", response.data)
                     self.assertNotIn("clave-super-secreta", " ".join(logs.output))
                     self.assertNotIn(b"No existen mascotas", response.data)
@@ -116,7 +116,7 @@ class ModeloTests(unittest.TestCase):
                     self.assertIsInstance(objetos[0], modelo)
                     self.assertEqual(vars(objetos[0]), fila)
                     self.assertEqual(objetos[1].id, 8)
-                    conexion.assert_called_once_with()
+                    conexion.assert_called_once_with("primera_flask")
                     consulta.assert_called_once_with(
                         "SELECT * FROM " + tabla + " ORDER BY id;"
                     )
@@ -131,40 +131,28 @@ class ModeloTests(unittest.TestCase):
 
 
 class ConexionTests(unittest.TestCase):
-    @patch.dict("os.environ", {}, clear=True)
     @patch("mysqlconnection.pymysql.connect")
-    def test_configuracion_por_defecto(self, connect):
-        MySQLConnection()
+    def test_configuracion_directa(self, connect):
+        MySQLConnection("primera_flask")
+        clave = connect.call_args.kwargs["password"]
+        self.assertIsInstance(clave, str)
         connect.assert_called_once_with(
-            host="127.0.0.1", port=3306, user="skillnest", password="",
+            host="localhost", port=3306, user="root", password=clave,
             database="primera_flask", charset="utf8mb4",
             cursorclass=pymysql.cursors.DictCursor, autocommit=True,
             connect_timeout=5,
         )
 
-    @patch.dict("os.environ", {
-        "MYSQL_HOST": "db.local", "MYSQL_PORT": "3307",
-        "MYSQL_USER": "prueba", "MYSQL_PASSWORD": "solo-ficticia",
-        "MYSQL_DATABASE": "otra_base",
-    }, clear=True)
     @patch("mysqlconnection.pymysql.connect")
-    def test_configuracion_entorno_y_argumento(self, connect):
-        MySQLConnection()
-        argumentos = connect.call_args.kwargs
-        self.assertEqual(argumentos["host"], "db.local")
-        self.assertEqual(argumentos["port"], 3307)
-        self.assertEqual(argumentos["user"], "prueba")
-        self.assertEqual(argumentos["password"], "solo-ficticia")
-        self.assertEqual(argumentos["database"], "otra_base")
-        MySQLConnection("base_explicita")
-        self.assertEqual(connect.call_args.kwargs["database"], "base_explicita")
-
-    @patch.dict("os.environ", {"MYSQL_PORT": "invalido"})
-    @patch("mysqlconnection.pymysql.connect")
-    def test_puerto_invalido(self, connect):
-        with self.assertRaises(pymysql.MySQLError):
+    def test_argumento_db_obligatorio(self, connect):
+        with self.assertRaises(TypeError):
             MySQLConnection()
+        with self.assertRaises(TypeError):
+            connectToMySQL()
         connect.assert_not_called()
+        for db in ("primera_flask", "base_explicita"):
+            self.assertIsInstance(connectToMySQL(db), MySQLConnection)
+            self.assertEqual(connect.call_args.kwargs["database"], db)
 
     @patch("mysqlconnection.pymysql.connect")
     def test_resultados_y_orden_de_cierre(self, connect):
@@ -187,7 +175,7 @@ class ConexionTests(unittest.TestCase):
                 )
                 connection.close.side_effect = lambda: orden.append("conexion")
                 datos = {"nombre": "nombre de prueba"}
-                self.assertEqual(MySQLConnection().query_db(sql, datos), esperado)
+                self.assertEqual(MySQLConnection("primera_flask").query_db(sql, datos), esperado)
                 cursor.execute.assert_called_once_with(sql, datos)
                 connection.close.assert_called_once_with()
                 self.assertEqual(orden, ["cursor", "conexion"])
@@ -198,7 +186,7 @@ class ConexionTests(unittest.TestCase):
         cursor = connection.cursor.return_value.__enter__.return_value
         cursor.execute.side_effect = pymysql.ProgrammingError("dato-secreto")
         with self.assertLogs("mysqlconnection", level="ERROR") as logs:
-            resultado = MySQLConnection().query_db(
+            resultado = MySQLConnection("primera_flask").query_db(
                 "SELECT dato_privado FROM mascotas WHERE id = %(id)s;", {"id": 3}
             )
         self.assertIs(resultado, False)
@@ -212,7 +200,7 @@ class ConexionTests(unittest.TestCase):
     def test_error_al_crear_cursor_cierra_conexion(self, connect):
         connect.return_value.cursor.side_effect = pymysql.OperationalError("privado")
         with self.assertLogs("mysqlconnection", level="ERROR"):
-            self.assertIs(MySQLConnection().query_db("SELECT 1;"), False)
+            self.assertIs(MySQLConnection("primera_flask").query_db("SELECT 1;"), False)
         connect.return_value.close.assert_called_once_with()
 
 

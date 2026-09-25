@@ -15,7 +15,7 @@ class Mascota:
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM mascotas ORDER BY id;"
-        resultados = connectToMySQL().query_db(query)
+        resultados = connectToMySQL('primera_flask').query_db(query)
         if resultados is False:
             raise MySQLError("No se pudo consultar mascotas.")
         return [cls(data) for data in resultados]
@@ -24,7 +24,7 @@ class Mascota:
     def get_by_id(cls, id):
         query = "SELECT * FROM mascotas WHERE id = %(id_mascota)s;"
         data = {"id_mascota": id}
-        resultados = connectToMySQL().query_db(query, data)
+        resultados = connectToMySQL('primera_flask').query_db(query, data)
         if resultados is False:
             raise MySQLError("No se pudo consultar mascotas.")
         return cls(resultados[0]) if resultados else None
@@ -36,7 +36,7 @@ class Mascota:
             ORDER BY id LIMIT 1;
         """
         data = {"nombre_mascota": nombre}
-        resultados = connectToMySQL().query_db(query, data)
+        resultados = connectToMySQL('primera_flask').query_db(query, data)
         if resultados is False:
             raise MySQLError("No se pudo consultar mascotas.")
         return cls(resultados[0]) if resultados else None

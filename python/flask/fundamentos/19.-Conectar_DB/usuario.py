@@ -14,7 +14,7 @@ class Usuario:
 
     @classmethod
     def get_all(cls):
-        resultados = connectToMySQL().query_db(
+        resultados = connectToMySQL('primera_flask').query_db(
             "SELECT * FROM usuarios ORDER BY id;"
         )
         if resultados is False:

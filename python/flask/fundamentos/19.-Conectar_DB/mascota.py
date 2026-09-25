@@ -14,7 +14,7 @@ class Mascota:
 
     @classmethod
     def get_all(cls):
-        resultados = connectToMySQL().query_db(
+        resultados = connectToMySQL('primera_flask').query_db(
             "SELECT * FROM mascotas ORDER BY id;"
         )
         if resultados is False:

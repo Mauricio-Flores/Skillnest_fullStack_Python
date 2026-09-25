@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="contenedor">
+        <div class="encabezado">
+            <h1>Usuarios</h1>
+            <a class="boton" href="{{ url_for('nuevo') }}">Nuevo usuario</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.nombre }} {{ usuario.apellido }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>{{ usuario.created_at.strftime('%Y-%m-%d') if usuario.created_at else '' }}</td>
+                    <td class="acciones">
+                        <a href="{{ url_for('detalle', id=usuario.id) }}">Ver</a>
+                        <a href="{{ url_for('editar', id=usuario.id) }}">Editar</a>
+                        <a href="{{ url_for('borrar', id=usuario.id) }}">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
