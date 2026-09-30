@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usuarios registrados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="layout">
+        <header class="page-header">
+            <div>
+                <p class="eyebrow">Directorio</p>
+                <h1>Usuarios</h1>
+                <p class="subtitle">Usuarios registrados en la base de datos.</p>
+            </div>
+            <a class="button button-primary" href="{{ url_for('nuevo_usuario') }}">Nuevo usuario</a>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="notice notice-{{ category }}" role="status">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <section class="panel" aria-label="Listado de usuarios">
+            {% if usuarios %}
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">E-mail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for usuario in usuarios %}
+                                <tr>
+                                    <td>{{ usuario.id }}</td>
+                                    <td>{{ usuario.nombre }}</td>
+                                    <td>{{ usuario.apellido }}</td>
+                                    <td>{{ usuario.email }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="empty-state">No existen usuarios registrados.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
