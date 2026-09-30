@@ -1,0 +1,21 @@
+body {
+    background: #f5f6f8;
+    color: #212529;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2 {
+    font-weight: 700;
+}
+
+.card,
+.btn,
+.form-control,
+.form-select {
+    border-radius: 0.5rem;
+}
+
+.table {
+    vertical-align: middle;
+}

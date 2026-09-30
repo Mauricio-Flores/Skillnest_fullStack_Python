@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Taco</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="container py-5">
+        <header class="d-flex justify-content-between align-items-center gap-3 mb-4 flex-wrap">
+            <div>
+                <h1>Crear Taco</h1>
+                <p class="text-muted mb-0">Selecciona el restaurante al que pertenece.</p>
+            </div>
+            <nav class="d-flex gap-2">
+                <a class="btn btn-outline-primary" href="{{ url_for('tacos') }}">Ver tacos</a>
+                <a class="btn btn-outline-secondary" href="{{ url_for('restaurantes') }}">Restaurantes</a>
+            </nav>
+        </header>
+
+        <section class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <form action="{{ url_for('crear') }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label" for="tortilla">Tortilla</label>
+                        <input class="form-control" id="tortilla" maxlength="45" name="tortilla" required type="text">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="guiso">Guiso</label>
+                        <input class="form-control" id="guiso" maxlength="45" name="guiso" required type="text">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="salsa">Salsa</label>
+                        <input class="form-control" id="salsa" maxlength="45" name="salsa" required type="text">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="restaurante_id">Restaurante</label>
+                        <select class="form-select" id="restaurante_id" name="restaurante_id" required>
+                            <option value="">Selecciona un restaurante</option>
+                            {% for taqueria in taquerias %}
+                            <option value="{{ taqueria.id }}">{{ taqueria.nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Crear Taco</button>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

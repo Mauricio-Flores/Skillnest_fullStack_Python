@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurantes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="container py-5">
+        <header class="d-flex justify-content-between align-items-center gap-3 mb-4 flex-wrap">
+            <div>
+                <h1>Restaurantes</h1>
+                <p class="text-muted mb-0">Selecciona un restaurante para ver sus tacos.</p>
+            </div>
+            <a class="btn btn-primary" href="{{ url_for('index') }}">Crear Taco</a>
+        </header>
+        <div class="row g-4">
+            {% for taqueria in taquerias %}
+            <div class="col-12 col-md-6 col-lg-4">
+                <article class="card h-100 shadow-sm border-0">
+                    <div class="card-body">
+                        <h2 class="h4">{{ taqueria.nombre }}</h2>
+                        <p class="text-muted">ID: {{ taqueria.id }}</p>
+                        <a class="btn btn-success" href="{{ url_for('restaurante', identificador=taqueria.id) }}">Ver tacos</a>
+                    </div>
+                </article>
+            </div>
+            {% else %}
+            <div class="col"><div class="alert alert-info">No existen restaurantes registrados.</div></div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

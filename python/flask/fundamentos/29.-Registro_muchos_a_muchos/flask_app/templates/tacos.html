@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tacos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="container py-5">
+        <header class="d-flex justify-content-between align-items-center gap-3 mb-4 flex-wrap">
+            <div>
+                <h1>Tacos</h1>
+                <p class="text-muted mb-0">Especialidades registradas.</p>
+            </div>
+            <a class="btn btn-primary" href="{{ url_for('index') }}">Crear Taco</a>
+        </header>
+        <section class="card shadow-sm border-0">
+            <div class="card-body p-0">
+                {% if tacos %}
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-dark"><tr><th>ID</th><th>Tortilla</th><th>Guiso</th><th>Salsa</th><th>Restaurante</th></tr></thead>
+                        <tbody>
+                            {% for taco in tacos %}
+                            <tr><td>{{ taco.id }}</td><td>{{ taco.tortilla }}</td><td>{{ taco.guiso }}</td><td>{{ taco.salsa }}</td><td>{{ taco.restaurante_id }}</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <p class="m-0 p-4 text-muted">No existen tacos registrados.</p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>
