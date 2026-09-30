@@ -15,7 +15,7 @@ class DatabaseSession:
             connection = pymysql.connect(
                 host=os.environ.get("MYSQL_HOST", "localhost"),
                 user=os.environ.get("MYSQL_USER", "root"),
-                password=os.environ.get("MYSQL_PASSWORD", ""),
+                password=os.environ.get("MYSQL_PASSWORD", "1234"),
                 database=self.database,
                 charset="utf8mb4",
                 cursorclass=pymysql.cursors.DictCursor,

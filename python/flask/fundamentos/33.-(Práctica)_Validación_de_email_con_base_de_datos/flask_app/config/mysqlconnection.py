@@ -12,7 +12,7 @@ class DatabaseConnector:
             self.connection = pymysql.connect(
                 host=os.environ.get("MYSQL_HOST", "localhost"),
                 user=os.environ.get("MYSQL_USER", "root"),
-                password=os.environ.get("MYSQL_PASSWORD", ""),
+                password=os.environ.get("MYSQL_PASSWORD", "1234"),
                 database=database_name,
                 charset="utf8mb4",
                 cursorclass=pymysql.cursors.DictCursor,
