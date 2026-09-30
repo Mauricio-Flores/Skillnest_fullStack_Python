@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio exitoso</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="contenedor-exito">
+        <section class="tarjeta-exito">
+            <h1>¡Bienvenido, {{ usuario.nombre }}!</h1>
+            <p>Has iniciado sesión correctamente.</p>
+            <p class="correo">{{ usuario.email }}</p>
+            <a href="/cerrar_sesion" class="boton boton-salir">Cerrar sesión</a>
+        </section>
+    </main>
+</body>
+</html>

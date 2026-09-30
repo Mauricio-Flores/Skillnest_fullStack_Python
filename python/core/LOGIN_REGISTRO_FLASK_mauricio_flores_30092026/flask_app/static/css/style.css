@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: #222;
+    background-color: #f4f4f4;
+}
+
+.contenedor {
+    width: min(900px, 92%);
+    margin: 45px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.formulario,
+.tarjeta-exito {
+    padding: 28px;
+    border: 1px solid #d5d5d5;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+h1,
+h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 26px;
+}
+
+.campo {
+    margin-bottom: 17px;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #375a7f;
+    outline: 2px solid rgba(55, 90, 127, 0.15);
+}
+
+small {
+    display: block;
+    margin-top: 6px;
+    color: #666;
+}
+
+.boton {
+    display: inline-block;
+    padding: 10px 18px;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.boton-registro {
+    background-color: #287a46;
+}
+
+.boton-login {
+    background-color: #375a7f;
+}
+
+.boton-salir {
+    margin-top: 16px;
+    background-color: #a33434;
+}
+
+.boton:hover {
+    opacity: 0.9;
+}
+
+.mensajes-error {
+    margin-bottom: 18px;
+    padding: 11px 14px;
+    border-left: 4px solid #b73b3b;
+    background-color: #f8e7e7;
+    color: #8a2323;
+}
+
+.mensajes-error p {
+    margin: 5px 0;
+}
+
+.contenedor-exito {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+}
+
+.tarjeta-exito {
+    width: min(480px, 100%);
+    text-align: center;
+}
+
+.correo {
+    color: #555;
+}
+
+@media (max-width: 700px) {
+    .contenedor {
+        grid-template-columns: 1fr;
+        margin: 24px auto;
+    }
+}
