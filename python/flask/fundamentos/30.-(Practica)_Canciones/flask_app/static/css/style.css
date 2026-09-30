@@ -1,0 +1,24 @@
+body {
+    background-color: #f5f6f8;
+    color: #212529;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 700;
+}
+
+.card,
+.form-control,
+.form-select,
+.btn,
+.alert {
+    border-radius: 0.5rem;
+}
+
+.list-group-item,
+.table {
+    vertical-align: middle;
+}

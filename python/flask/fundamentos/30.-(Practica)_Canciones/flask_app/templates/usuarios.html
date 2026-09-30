@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="container py-5"><div class="row g-4">
+        <section class="col-lg-5"><div class="card shadow-sm border-0"><div class="card-body p-4">
+            <h1 class="h3 mb-4">Nuevo Usuario</h1>
+            <form action="{{ url_for('crear_usuario') }}" method="POST">
+                <input class="form-control mb-3" maxlength="45" name="nombre" placeholder="Nombre" required>
+                <input class="form-control mb-3" maxlength="45" name="email" placeholder="E-mail" required type="email">
+                <input class="form-control mb-4" maxlength="45" name="contrasena" placeholder="Contrasena" required type="password">
+                <button class="btn btn-primary" type="submit">Crear</button>
+            </form>
+        </div></div></section>
+        <section class="col-lg-7"><div class="card shadow-sm border-0"><div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4"><h2 class="h3 mb-0">Todos los Usuarios</h2><a class="btn btn-outline-primary btn-sm" href="{{ url_for('canciones') }}">Canciones</a></div>
+            <div class="list-group">{% for usuario in usuarios %}<a class="list-group-item list-group-item-action" href="{{ url_for('mostrar_usuario', identificador=usuario.id) }}">{{ usuario.nombre }}</a>{% else %}<p class="text-muted">No existen usuarios registrados.</p>{% endfor %}</div>
+        </div></div></section>
+    </div>{% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="alert alert-{{ category }} mt-4">{{ message }}</div>{% endfor %}{% endwith %}</main>
+</body>
+</html>

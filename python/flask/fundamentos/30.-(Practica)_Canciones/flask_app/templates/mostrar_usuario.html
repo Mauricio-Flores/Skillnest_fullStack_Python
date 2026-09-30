@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ usuario.nombre }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="container py-5"><header class="d-flex justify-content-between mb-4"><div><h1>{{ usuario.nombre }}</h1><p class="text-muted">{{ usuario.email }}</p></div><a class="btn btn-outline-primary" href="{{ url_for('usuarios') }}">Inicio</a></header><div class="row g-4">
+        <section class="col-lg-7"><div class="card shadow-sm border-0"><div class="card-body p-4"><h2 class="h4">Favoritos</h2><ul class="list-group">{% for cancion in usuario.favoritos %}<li class="list-group-item">{{ cancion["titulo"] }} - {{ cancion["artista"] }}</li>{% else %}<li class="list-group-item">Este usuario todavia no tiene canciones favoritas.</li>{% endfor %}</ul></div></div></section>
+        <section class="col-lg-5"><div class="card shadow-sm border-0"><div class="card-body p-4"><h2 class="h4">Agregar Favorito</h2><form action="{{ url_for('agregar_favorito') }}" method="POST"><input name="usuario_id" type="hidden" value="{{ usuario.id }}"><input name="origen" type="hidden" value="usuario"><select class="form-select mb-3" name="cancion_id" required><option value="">Selecciona una cancion</option>{% for cancion in canciones %}<option value="{{ cancion.id }}">{{ cancion.titulo }}</option>{% endfor %}</select><button class="btn btn-primary" type="submit">Agregar</button></form><a class="d-block mt-3" href="{{ url_for('canciones') }}">Agregar Cancion</a></div></div></section>
+    </div>{% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="alert alert-{{ category }} mt-4">{{ message }}</div>{% endfor %}{% endwith %}</main>
+</body>
+</html>
