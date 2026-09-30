@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<erd database="esquema_arepas" format="mysql-workbench-model">
+  <table name="pedidos" x="180" y="140">
+    <column name="id" type="INT" primary_key="true" auto_increment="true" />
+    <column name="nombre" type="VARCHAR(100)" nullable="false" />
+    <column name="tipo_arepa" type="VARCHAR(100)" nullable="false" />
+    <column name="cantidad" type="INT" nullable="false" />
+    <column name="created_at" type="DATETIME" nullable="false" />
+    <column name="updated_at" type="DATETIME" nullable="false" />
+  </table>
+</erd>
