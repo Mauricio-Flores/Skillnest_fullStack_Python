@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<erd database="esquema_seguidores" format="mysql-workbench-model">
+  <table name="usuarios" x="140" y="160">
+    <column name="id" type="INT" primary_key="true" auto_increment="true" />
+    <column name="nombre" type="VARCHAR(45)" nullable="false" />
+    <column name="apellido" type="VARCHAR(45)" nullable="false" />
+    <column name="email" type="VARCHAR(45)" nullable="false" />
+    <column name="created_at" type="DATETIME" nullable="false" />
+    <column name="updated_at" type="DATETIME" nullable="false" />
+  </table>
+  <table name="seguidores" x="490" y="160">
+    <column name="id" type="INT" primary_key="true" auto_increment="true" />
+    <column name="usuario_id" type="INT" nullable="false" />
+    <column name="seguidor_id" type="INT" nullable="false" />
+    <column name="created_at" type="DATETIME" nullable="false" />
+    <column name="updated_at" type="DATETIME" nullable="false" />
+    <unique columns="usuario_id,seguidor_id" />
+  </table>
+  <foreign_key name="fk_seguidores_usuario" from="seguidores.usuario_id" to="usuarios.id" />
+  <foreign_key name="fk_seguidores_seguidor" from="seguidores.seguidor_id" to="usuarios.id" />
+</erd>

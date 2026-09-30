@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Seguidores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <main class="page-shell">
+        <header class="hero">
+            <p class="eyebrow">Red de contactos</p>
+            <h1>Seguidores</h1>
+            <p>Registra usuarios y consulta sus relaciones de seguimiento.</p>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="notice notice-{{ category }}" role="status">{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+
+        <section class="panel relationships" aria-labelledby="relationships-title">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Relaciones registradas</p>
+                    <h2 id="relationships-title">Quién sigue a quién</h2>
+                </div>
+                <span class="relation-count">{{ relaciones | length }}</span>
+            </div>
+
+            {% if relaciones %}
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Seguidor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for relacion in relaciones %}
+                                <tr>
+                                    <td>{{ relacion['usuario_nombre'] }}</td>
+                                    <td>{{ relacion['seguidor_nombre'] }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p class="empty-state">Todavía no existen relaciones registradas.</p>
+            {% endif %}
+        </section>
+
+        <div class="form-grid">
+            <section class="panel" aria-labelledby="new-user-title">
+                <p class="eyebrow">Alta</p>
+                <h2 id="new-user-title">Nuevo usuario</h2>
+                <form action="{{ url_for('create_user') }}" method="post">
+                    <label for="nombre">Nombre</label>
+                    <input id="nombre" name="nombre" maxlength="45" required type="text">
+
+                    <label for="apellido">Apellido</label>
+                    <input id="apellido" name="apellido" maxlength="45" required type="text">
+
+                    <label for="email">E-mail</label>
+                    <input id="email" name="email" maxlength="45" required type="email">
+
+                    <button class="button button-primary" type="submit">Crear usuario</button>
+                </form>
+            </section>
+
+            <section class="panel follow-panel" aria-labelledby="follow-title">
+                <p class="eyebrow">Nueva conexión</p>
+                <h2 id="follow-title">Seguir</h2>
+                <form action="{{ url_for('create_follow_relation') }}" method="post">
+                    <label for="usuario_id">Usuario</label>
+                    <select id="usuario_id" name="usuario_id" required>
+                        <option value="">Selecciona un usuario</option>
+                        {% for usuario in usuarios %}
+                            <option value="{{ usuario.id }}">{{ usuario.nombre }} {{ usuario.apellido }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="seguidor_id">Seguidor</label>
+                    <select id="seguidor_id" name="seguidor_id" required>
+                        <option value="">Selecciona un seguidor</option>
+                        {% for usuario in usuarios %}
+                            <option value="{{ usuario.id }}">{{ usuario.nombre }} {{ usuario.apellido }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <button class="button button-accent" type="submit">Registrar seguimiento</button>
+                </form>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
