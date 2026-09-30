@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Panel | Cuentas seguras{% endblock %}
+
+{% block contenido %}
+<section class="card shadow-sm">
+    <div class="card-body p-4">
+        <h1 class="h3 mb-3">Bienvenido, {{ usuario.nombre }}</h1>
+        <p>Has iniciado sesión correctamente.</p>
+        <hr>
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Nombre</dt>
+            <dd class="col-sm-9">{{ usuario.nombre }}</dd>
+            <dt class="col-sm-3">Apellido</dt>
+            <dd class="col-sm-9">{{ usuario.apellido }}</dd>
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">{{ usuario.email }}</dd>
+        </dl>
+    </div>
+</section>
+{% endblock %}

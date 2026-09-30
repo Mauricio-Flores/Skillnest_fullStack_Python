@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-labelledby="title description">
+  <title id="title">Diagrama entidad-relación de esquema_loginreg</title>
+  <desc id="description">Tabla usuarios con identificador, datos personales, correo único, hash de contraseña y marcas de tiempo.</desc>
+  <rect width="760" height="430" fill="#f8f9fa"/>
+  <rect x="140" y="36" width="480" height="358" rx="8" fill="#fff" stroke="#0d6efd" stroke-width="2"/>
+  <rect x="140" y="36" width="480" height="58" rx="8" fill="#0d6efd"/>
+  <text x="380" y="73" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="24" font-weight="bold">usuarios</text>
+  <g fill="#212529" font-family="Arial, sans-serif" font-size="19">
+    <text x="174" y="132"><tspan font-weight="bold">PK</tspan><tspan dx="18">id : INT UNSIGNED AUTO_INCREMENT</tspan></text>
+    <text x="174" y="176">nombre : VARCHAR(100) NOT NULL</text>
+    <text x="174" y="220">apellido : VARCHAR(100) NOT NULL</text>
+    <text x="174" y="264"><tspan font-weight="bold">UQ</tspan><tspan dx="17">email : VARCHAR(150) NOT NULL</tspan></text>
+    <text x="174" y="308">password : VARCHAR(255) NOT NULL</text>
+    <text x="174" y="352">created_at, updated_at : DATETIME</text>
+  </g>
+  <g stroke="#dee2e6" stroke-width="1"><line x1="160" y1="148" x2="600" y2="148"/><line x1="160" y1="192" x2="600" y2="192"/><line x1="160" y1="236" x2="600" y2="236"/><line x1="160" y1="280" x2="600" y2="280"/><line x1="160" y1="324" x2="600" y2="324"/></g>
+</svg>
