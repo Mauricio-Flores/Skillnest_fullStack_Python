@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block titulo %}BookHub · {{ 'Editar Libro' if editar else 'Nuevo Libro' }}{% endblock %}
+{% block contenido %}
+<h1 class="h2 mb-4">{{ 'Editar Libro' if editar else 'Agregar Nuevo Libro' }}</h1>
+<form class="formulario" action="{{ url_for('libros.editar', libro_id=libro_id) if editar else url_for('libros.nuevo') }}" method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3">
+        <label class="form-label" for="titulo">Título</label>
+        <input class="form-control" type="text" name="titulo" id="titulo" value="{{ datos.get('titulo', '') }}" minlength="2" maxlength="150" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="autor">Autor</label>
+        <input class="form-control" type="text" name="autor" id="autor" value="{{ datos.get('autor', '') }}" minlength="2" maxlength="100" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="genero">Género</label>
+        <select class="form-select" name="genero" id="genero" required>
+            <option value="">Selecciona un género</option>
+            {% for genero in generos %}
+            <option value="{{ genero }}" {% if datos.get('genero') == genero %}selected{% endif %}>{{ genero }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="fecha">Fecha de publicación</label>
+        <input class="form-control" type="date" name="fecha" id="fecha" value="{{ datos.get('fecha', '') }}" min="{{ hoy }}" required>
+        <div class="form-text">La fecha debe ser hoy o una fecha futura.</div>
+    </div>
+    <div class="mb-4">
+        <label class="form-label" for="descripcion">Descripción</label>
+        <textarea class="form-control" name="descripcion" id="descripcion" rows="5" minlength="10" maxlength="5000" required>{{ datos.get('descripcion', '') }}</textarea>
+    </div>
+    <div class="d-flex gap-4 align-items-center">
+        <button class="btn btn-dark px-4" type="submit">{{ 'Actualizar' if editar else 'Guardar' }}</button>
+        <a href="{{ url_for('libros.inicio') }}">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

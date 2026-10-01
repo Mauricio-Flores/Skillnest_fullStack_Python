@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% from 'tablas.html' import tabla_comunidad %}
+{% block titulo %}BookHub · Mis Libros{% endblock %}
+{% block contenido %}
+<div class="d-flex flex-wrap gap-3 justify-content-between align-items-center mb-4">
+    <h1 class="h2 mb-0">Mis Libros</h1>
+    <a class="btn btn-primary" href="{{ url_for('libros.nuevo') }}">+ Nuevo Libro</a>
+</div>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-secondary">
+            <tr><th scope="col">Título</th><th scope="col">Autor</th><th scope="col">Género</th><th scope="col">Fecha</th><th scope="col">Favoritos</th><th scope="col">Acciones</th></tr>
+        </thead>
+        <tbody>
+            {% for libro in propios %}
+            <tr>
+                <td>{{ libro.titulo }}</td><td>{{ libro.autor }}</td><td>{{ libro.genero }}</td>
+                <td class="fecha">{{ libro.fecha.strftime('%Y-%m-%d') }}</td><td>{{ libro.total_favoritos }}</td>
+                <td>
+                    <div class="d-flex gap-3 acciones">
+                        <a href="{{ url_for('libros.detalle', libro_id=libro.id) }}">Ver</a>
+                        <a href="{{ url_for('libros.editar', libro_id=libro.id) }}">Editar</a>
+                        <form action="{{ url_for('libros.eliminar', libro_id=libro.id) }}" method="post" onsubmit="return confirm('¿Quieres borrar este libro?');">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button class="btn btn-link text-danger p-0" type="submit">Borrar</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6" class="text-center text-secondary py-4">Aún no publicas libros. Agrega tu primer libro.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<section class="mt-5" aria-labelledby="titulo-comunidad">
+    <h2 class="h3 mb-3" id="titulo-comunidad">Libros de la Comunidad</h2>
+    {{ tabla_comunidad(comunidad) }}
+</section>
+{% endblock %}

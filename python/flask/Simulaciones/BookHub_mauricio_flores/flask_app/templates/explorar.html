@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% from 'tablas.html' import tabla_comunidad %}
+{% block titulo %}BookHub · Explorar{% endblock %}
+{% block contenido %}
+<h1 class="h2 mb-4">Libros de la Comunidad</h1>
+{{ tabla_comunidad(comunidad) }}
+<a href="{{ url_for('libros.inicio') }}">← Volver a Mis Libros</a>
+{% endblock %}

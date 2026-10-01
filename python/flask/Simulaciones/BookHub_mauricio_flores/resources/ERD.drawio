@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram id="bookhub" name="BookHub ERD">
+    <mxGraphModel grid="1" gridSize="10" page="1" pageWidth="1500" pageHeight="910">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="usuarios" value="USUARIOS&#10;&#10;PK id: INT UNSIGNED NOT NULL&#10;nombre: VARCHAR(45) NOT NULL&#10;apellido: VARCHAR(45) NOT NULL&#10;UQ email: VARCHAR(254) NOT NULL&#10;password: VARCHAR(255) NOT NULL&#10;created_at: DATETIME NOT NULL&#10;updated_at: DATETIME NOT NULL" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=16;fontSize=17;fillColor=#f2f3f5;strokeColor=#77808a;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="65" y="150" width="440" height="324" />
+        </mxCell>
+        <mxCell id="libros" value="LIBROS&#10;&#10;PK id: INT UNSIGNED NOT NULL&#10;titulo: VARCHAR(150) NOT NULL&#10;autor: VARCHAR(100) NOT NULL&#10;genero: VARCHAR(40) NOT NULL&#10;fecha: DATE NOT NULL&#10;descripcion: TEXT NOT NULL&#10;FK usuario_id: INT UNSIGNED NOT NULL&#10;created_at: DATETIME NOT NULL&#10;updated_at: DATETIME NOT NULL" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=16;fontSize=17;fillColor=#f2f3f5;strokeColor=#77808a;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="995" y="150" width="440" height="398" />
+        </mxCell>
+        <mxCell id="favoritos" value="FAVORITOS&#10;&#10;PK, FK usuario_id: INT UNSIGNED NOT NULL&#10;PK, FK libro_id: INT UNSIGNED NOT NULL&#10;created_at: DATETIME NOT NULL" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=16;fontSize=17;fillColor=#f2f3f5;strokeColor=#77808a;" vertex="1" parent="1">
+          <mxGeometry as="geometry" x="530" y="595" width="440" height="176" />
+        </mxCell>
+        <mxCell id="r0" value="1 publica 0..N" style="edgeStyle=orthogonalEdgeStyle;endArrow=ERmany;startArrow=ERone;html=0;fontSize=18;" edge="1" parent="1" source="usuarios" target="libros">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="r1" value="1 agrega 0..N" style="edgeStyle=orthogonalEdgeStyle;endArrow=ERmany;startArrow=ERone;html=0;fontSize=18;" edge="1" parent="1" source="usuarios" target="favoritos">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="r2" value="1 recibe 0..N" style="edgeStyle=orthogonalEdgeStyle;endArrow=ERmany;startArrow=ERone;html=0;fontSize=18;" edge="1" parent="1" source="libros" target="favoritos">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

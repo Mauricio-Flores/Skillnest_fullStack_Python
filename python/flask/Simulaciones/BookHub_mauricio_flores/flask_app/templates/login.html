@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block titulo %}BookHub · Login / Registro{% endblock %}
+{% block contenido %}
+<header class="text-center mb-4 mt-2">
+    <h1 class="marca">
+        <img src="{{ url_for('static', filename='img/logo-bookhub.svg') }}" alt="" width="64" height="52">
+        <span>BookHub</span>
+    </h1>
+    <p class="text-secondary">Comparte, descubre y comenta libros</p>
+</header>
+<div class="row g-4 acceso mx-auto">
+    <section class="col-md-6" aria-labelledby="titulo-registro">
+        <div class="card h-100">
+            <div class="card-body p-4">
+                <h2 class="h4 mb-4" id="titulo-registro">Crear Cuenta</h2>
+                <form action="{{ url_for('usuarios.registro') }}" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <div class="mb-3">
+                        <label class="form-label" for="nombre">Nombre</label>
+                        <input class="form-control" type="text" name="nombre" id="nombre" value="{{ datos.get('nombre', '') }}" minlength="2" maxlength="45" autocomplete="given-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="apellido">Apellido</label>
+                        <input class="form-control" type="text" name="apellido" id="apellido" value="{{ datos.get('apellido', '') }}" minlength="2" maxlength="45" autocomplete="family-name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="email-registro">E-mail</label>
+                        <input class="form-control" type="email" name="email" id="email-registro" value="{{ datos.get('email', '') }}" maxlength="254" autocomplete="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="password-registro">Contraseña</label>
+                        <input class="form-control" type="password" name="password" id="password-registro" minlength="8" maxlength="72" autocomplete="new-password" aria-describedby="ayuda-password" required>
+                        <div class="form-text" id="ayuda-password">Mínimo 8 caracteres.</div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="confirmar">Confirmar Contraseña</label>
+                        <input class="form-control" type="password" name="confirmar" id="confirmar" minlength="8" maxlength="72" autocomplete="new-password" required>
+                    </div>
+                    <button class="btn btn-dark w-100" type="submit">Registrarse</button>
+                    <a class="d-block mt-3 small" href="#titulo-login">¿Ya tienes cuenta? Inicia sesión</a>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="col-md-6" aria-labelledby="titulo-login">
+        <div class="card h-100">
+            <div class="card-body p-4">
+                <h2 class="h4 mb-4" id="titulo-login">Iniciar Sesión</h2>
+                <form action="{{ url_for('usuarios.login') }}" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <div class="mb-3">
+                        <label class="form-label" for="email-login">E-mail</label>
+                        <input class="form-control" type="email" name="email" id="email-login" value="{{ email_login }}" maxlength="254" autocomplete="username" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="password-login">Contraseña</label>
+                        <input class="form-control" type="password" name="password" id="password-login" maxlength="72" autocomplete="current-password" required>
+                    </div>
+                    <button class="btn btn-dark w-100" type="submit">Iniciar Sesión</button>
+                    <a class="d-block mt-3 small" href="#titulo-registro">¿No tienes cuenta? Regístrate</a>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

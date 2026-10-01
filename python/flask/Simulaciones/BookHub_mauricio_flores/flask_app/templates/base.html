@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block titulo %}BookHub{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css') }}">
+</head>
+<body>
+    {% if g.usuario %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('libros.inicio') }}">
+                <img src="{{ url_for('static', filename='img/logo-bookhub.svg') }}" alt="" width="24" height="20">
+                <span>BookHub</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <div class="navbar-nav me-auto">
+                    <a class="nav-link {% if request.endpoint == 'libros.inicio' %}active{% endif %}" href="{{ url_for('libros.inicio') }}">Mis Libros</a>
+                    <a class="nav-link {% if request.endpoint == 'libros.explorar' %}active{% endif %}" href="{{ url_for('libros.explorar') }}">Explorar</a>
+                    <a class="nav-link {% if request.endpoint == 'favoritos.inicio' %}active{% endif %}" href="{{ url_for('favoritos.inicio') }}">Mis Favoritos</a>
+                </div>
+                <span class="navbar-text me-3">Bienvenido, {{ g.usuario.nombre }}</span>
+                <form action="{{ url_for('usuarios.logout') }}" method="post">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button class="btn btn-outline-light btn-sm" type="submit">Cerrar sesión</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+    <main class="container py-4">
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+            {% if mensajes %}
+            <div class="mb-4" role="status" aria-live="polite">
+                {% for categoria, mensaje in mensajes %}
+                <div class="alert alert-{{ categoria }} mb-2">{{ mensaje }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        {% block contenido %}{% endblock %}
+    </main>
+    <script src="{{ url_for('static', filename='vendor/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>

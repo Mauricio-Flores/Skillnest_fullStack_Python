@@ -1,0 +1,23 @@
+body { background-color: #fff; color: #212529; }
+.container { max-width: 1120px; }
+.marca { display: flex; justify-content: center; align-items: center; gap: 12px; font-size: 2.8rem; font-weight: 700; }
+.marca img { width: 64px; height: 52px; }
+.acceso { max-width: 850px; }
+.card { border-color: #d0d0d0; border-radius: 5px; }
+.formulario { max-width: 620px; }
+.table th { white-space: nowrap; }
+.table td { min-width: 90px; max-width: 300px; overflow-wrap: anywhere; }
+.acciones, .fecha { white-space: nowrap; }
+.acciones .btn { font-size: inherit; }
+.portada { background-color: #ededed; border: 1px solid #ccc; }
+dt, dd { display: inline; margin: 0; }
+dt { font-weight: 600; }
+.descripcion { white-space: pre-wrap; overflow-wrap: anywhere; }
+.navbar-brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.navbar-brand img { filter: brightness(0) invert(1); }
+@media (max-width: 767px) {
+    .navbar-nav { margin: 12px 0; }
+    .navbar-text { display: block; margin-bottom: 12px; }
+    .marca { font-size: 2.3rem; }
+    .marca img { width: 56px; height: 46px; }
+}

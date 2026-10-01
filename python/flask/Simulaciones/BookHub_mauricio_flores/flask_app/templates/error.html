@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block titulo %}BookHub · Error {{ codigo }}{% endblock %}
+{% block contenido %}
+<div class="alert alert-danger">
+    <h1 class="h4">Error {{ codigo }}</h1>
+    <p class="mb-0">{{ mensaje }}</p>
+</div>
+<a href="{{ url_for('libros.inicio') if g.usuario else url_for('usuarios.inicio') }}">Volver al inicio</a>
+{% endblock %}

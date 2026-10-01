@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block titulo %}BookHub · {{ libro.titulo }}{% endblock %}
+{% block contenido %}
+<article class="card mb-4">
+    <div class="card-body p-4">
+        <div class="row g-4">
+            <div class="col-sm-auto">
+                <img class="portada" src="{{ url_for('static', filename='img/libro.svg') }}" width="130" height="175" alt="Portada de libro genérica">
+            </div>
+            <div class="col">
+                <h1 class="h3">{{ libro.titulo }}</h1>
+                <dl class="mb-3">
+                    <div><dt>Autor:</dt> <dd>{{ libro.autor }}</dd></div>
+                    <div><dt>Género:</dt> <dd>{{ libro.genero }}</dd></div>
+                    <div><dt>Publicado por:</dt> <dd>{{ libro.nombre_usuario }} {{ libro.apellido_usuario }}</dd></div>
+                    <div><dt>Fecha:</dt> <dd>{{ libro.fecha.strftime('%Y-%m-%d') }}</dd></div>
+                </dl>
+                {% if not es_favorito %}
+                <form action="{{ url_for('favoritos.agregar', libro_id=libro.id) }}" method="post" class="mb-3">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button class="btn btn-outline-dark" type="submit">♥ Agregar a favoritos</button>
+                </form>
+                {% else %}
+                <p class="text-success">♥ Este libro está en tus favoritos.</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="mt-3"><h2 class="h6">Descripción</h2><p class="descripcion mb-0">{{ libro.descripcion }}</p></div>
+    </div>
+</article>
+<section aria-labelledby="usuarios-favoritos">
+    <h2 class="h5 mb-3" id="usuarios-favoritos">Usuarios que agregaron este libro a favoritos ({{ usuarios|length }})</h2>
+    <ul class="list-group mb-4">
+        {% for usuario in usuarios %}
+        <li class="list-group-item">● &nbsp; {{ usuario.nombre }} {{ usuario.apellido }}</li>
+        {% else %}
+        <li class="list-group-item text-secondary">Nadie ha agregado este libro a favoritos todavía.</li>
+        {% endfor %}
+    </ul>
+</section>
+<a href="{{ url_for('libros.inicio') }}">← Volver a Mis Libros</a>
+{% endblock %}

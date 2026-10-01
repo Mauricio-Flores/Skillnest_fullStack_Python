@@ -1,0 +1,20 @@
+{% macro tabla_comunidad(libros) %}
+<div class="table-responsive">
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="table-secondary">
+            <tr><th scope="col">Título</th><th scope="col">Autor</th><th scope="col">Género</th><th scope="col">Publicado por</th><th scope="col">Favoritos</th><th scope="col">Acción</th></tr>
+        </thead>
+        <tbody>
+            {% for libro in libros %}
+            <tr>
+                <td>{{ libro.titulo }}</td><td>{{ libro.autor }}</td><td>{{ libro.genero }}</td>
+                <td>{{ libro.nombre_usuario }} {{ libro.apellido_usuario }}</td><td>{{ libro.total_favoritos }}</td>
+                <td><a href="{{ url_for('libros.detalle', libro_id=libro.id) }}">Ver</a></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6" class="text-center text-secondary py-4">Todavía no hay libros de otros usuarios.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endmacro %}
