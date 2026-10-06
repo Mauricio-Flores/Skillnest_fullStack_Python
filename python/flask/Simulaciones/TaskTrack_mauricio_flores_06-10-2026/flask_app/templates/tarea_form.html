@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}TaskTrack - {{ titulo_pagina }}{% endblock %}
+{% block content %}
+<section class="formulario-pagina">
+    <h1>{{ titulo_pagina }}</h1>
+    {% with errores = get_flashed_messages(category_filter=['tarea']) %}
+        {% if errores %}
+            <div class="errores">
+                {% for error in errores %}<p>{{ error }}</p>{% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {% if not categorias %}
+        <div class="alerta alerta-error">Antes de crear una tarea debes <a href="{{ url_for('categorias') }}">crear una categoría</a>.</div>
+    {% endif %}
+
+    {% set titulo_valor = datos.get('titulo', tarea.titulo if tarea else '') %}
+    {% set categoria_valor = datos.get('categoria_id', tarea.categoria_id if tarea else '')|string %}
+    {% set prioridad_valor = datos.get('prioridad', tarea.prioridad if tarea else '') %}
+    {% set estado_valor = datos.get('estado', tarea.estado if tarea else 'Pendiente') %}
+    {% set fecha_valor = datos.get('fecha_limite', tarea.fecha_limite.strftime('%Y-%m-%d') if tarea else '') %}
+    {% set descripcion_valor = datos.get('descripcion', tarea.descripcion if tarea else '') %}
+
+    <form action="{{ accion }}" method="post" class="formulario formulario-tarea">
+        <label for="titulo">Título</label>
+        <input id="titulo" name="titulo" value="{{ titulo_valor }}" required>
+
+        <label for="categoria_id">Categoría</label>
+        <select id="categoria_id" name="categoria_id" required>
+            <option value="">Selecciona una categoría</option>
+            {% for categoria in categorias %}
+                <option value="{{ categoria.id }}" {% if categoria_valor == categoria.id|string %}selected{% endif %}>{{ categoria.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="prioridad">Prioridad</label>
+        <select id="prioridad" name="prioridad" required>
+            <option value="">Selecciona prioridad</option>
+            {% for prioridad in prioridades %}
+                <option value="{{ prioridad }}" {% if prioridad_valor == prioridad %}selected{% endif %}>{{ prioridad }}</option>
+            {% endfor %}
+        </select>
+
+        {% if tarea %}
+        <label for="estado">Estado</label>
+        <select id="estado" name="estado" required>
+            {% for estado in estados %}
+                <option value="{{ estado }}" {% if estado_valor == estado %}selected{% endif %}>{{ estado }}</option>
+            {% endfor %}
+        </select>
+        {% endif %}
+
+        <label for="fecha_limite">Fecha límite</label>
+        <input id="fecha_limite" type="date" name="fecha_limite" value="{{ fecha_valor }}" required>
+
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion" rows="6" required>{{ descripcion_valor }}</textarea>
+
+        <div class="botones-formulario">
+            <button class="boton boton-oscuro" type="submit" {% if not categorias %}disabled{% endif %}>{{ boton }}</button>
+            <a class="boton boton-claro" href="{{ url_for('dashboard') }}">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

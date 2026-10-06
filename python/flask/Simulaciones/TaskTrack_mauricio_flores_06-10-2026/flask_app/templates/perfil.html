@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}TaskTrack - Perfil{% endblock %}
+{% block content %}
+<section class="formulario-pagina">
+    <h1>Mi Perfil</h1>
+    <p class="texto-suave">Actualiza tus datos personales.</p>
+    {% with errores = get_flashed_messages(category_filter=['perfil']) %}
+        {% if errores %}<div class="errores">{% for error in errores %}<p>{{ error }}</p>{% endfor %}</div>{% endif %}
+    {% endwith %}
+    <form action="{{ url_for('actualizar_perfil') }}" method="post" class="formulario">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" value="{{ datos.get('nombre', usuario.nombre) }}" required>
+        <label for="apellido">Apellido</label>
+        <input id="apellido" name="apellido" value="{{ datos.get('apellido', usuario.apellido) }}" required>
+        <label for="email">E-mail</label>
+        <input id="email" type="email" name="email" value="{{ datos.get('email', usuario.email) }}" required>
+        <button class="boton boton-oscuro" type="submit">Guardar cambios</button>
+    </form>
+</section>
+{% endblock %}

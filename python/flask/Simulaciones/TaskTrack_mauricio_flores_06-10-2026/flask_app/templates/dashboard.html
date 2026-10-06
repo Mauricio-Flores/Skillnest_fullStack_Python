@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block title %}TaskTrack - Mis Tareas{% endblock %}
+{% block content %}
+<div class="titulo-acciones">
+    <div>
+        <h1>Mis Tareas</h1>
+        <p class="texto-suave">Administra tus pendientes y proyectos.</p>
+    </div>
+    <a class="boton boton-azul" href="{{ url_for('nueva_tarea') }}">＋ Nueva Tarea</a>
+</div>
+
+<form class="filtros" method="get" action="{{ url_for('dashboard') }}">
+    <div>
+        <label for="buscar">Buscar por título</label>
+        <input id="buscar" name="buscar" value="{{ busqueda }}" placeholder="Ej: Estudiar Flask">
+    </div>
+    <div>
+        <label for="estado">Estado</label>
+        <select id="estado" name="estado">
+            <option value="">Todos</option>
+            {% for opcion in ['Pendiente', 'En progreso', 'Completada'] %}
+                <option value="{{ opcion }}" {% if estado == opcion %}selected{% endif %}>{{ opcion }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button class="boton boton-oscuro" type="submit">Filtrar</button>
+    {% if estado or busqueda %}<a class="boton boton-claro" href="{{ url_for('dashboard') }}">Limpiar</a>{% endif %}
+</form>
+
+<div class="tabla-contenedor">
+    <table>
+        <thead>
+            <tr>
+                <th>Título</th><th>Categoría</th><th>Prioridad</th><th>Fecha límite</th><th>Estado</th><th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tarea in tareas %}
+            <tr>
+                <td>{{ tarea.titulo }}</td>
+                <td>{{ tarea.categoria }}</td>
+                <td><span class="etiqueta prioridad-{{ tarea.prioridad|lower }}">{{ tarea.prioridad }}</span></td>
+                <td>{{ tarea.fecha_limite.strftime('%d-%m-%Y') }}</td>
+                <td><span class="etiqueta estado-{{ tarea.estado|lower|replace(' ', '-') }}">{{ tarea.estado }}</span></td>
+                <td class="acciones-tabla">
+                    <a href="{{ url_for('detalle_tarea', tarea_id=tarea.id) }}">Ver</a>
+                    <a href="{{ url_for('editar_tarea', tarea_id=tarea.id) }}">Editar</a>
+                    {% if tarea.estado != 'Completada' %}
+                    <form action="{{ url_for('completar_tarea', tarea_id=tarea.id) }}" method="post">
+                        <button class="accion-verde" type="submit">Completar</button>
+                    </form>
+                    {% endif %}
+                    <form action="{{ url_for('borrar_tarea', tarea_id=tarea.id) }}" method="post" onsubmit="return confirm('¿Seguro que deseas borrar esta tarea?');">
+                        <button class="accion-roja" type="submit">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="6" class="vacio">No hay tareas que coincidan con la búsqueda.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="paneles-dashboard">
+    <section>
+        <h2>Próximas tareas</h2>
+        <div class="tabla-contenedor">
+            <table>
+                <thead><tr><th>Título</th><th>Fecha límite</th><th>Días restantes</th></tr></thead>
+                <tbody>
+                {% for tarea in proximas %}
+                    <tr>
+                        <td><a href="{{ url_for('detalle_tarea', tarea_id=tarea.id) }}">{{ tarea.titulo }}</a></td>
+                        <td>{{ tarea.fecha_limite.strftime('%d-%m-%Y') }}</td>
+                        <td>{{ dias_restantes(tarea.fecha_limite) }}</td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="3" class="vacio">No tienes tareas próximas.</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <aside class="resumen">
+        <h2>Resumen</h2>
+        <p><span>Total de tareas</span><strong>{{ resumen.total }}</strong></p>
+        <p><span>Pendientes</span><strong>{{ resumen.pendientes }}</strong></p>
+        <p><span>En progreso</span><strong>{{ resumen.en_progreso }}</strong></p>
+        <p><span>Completadas</span><strong>{{ resumen.completadas }}</strong></p>
+        <hr>
+        <p><span>Prioridad alta</span><strong>{{ resumen.alta }}</strong></p>
+        <p><span>Prioridad media</span><strong>{{ resumen.media }}</strong></p>
+        <p><span>Prioridad baja</span><strong>{{ resumen.baja }}</strong></p>
+    </aside>
+</div>
+{% endblock %}

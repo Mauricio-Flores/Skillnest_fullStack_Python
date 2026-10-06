@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}TaskTrack{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% if session.get('usuario_id') %}
+    <header class="barra">
+        <div class="contenedor barra-contenido">
+            <a class="marca marca-clara" href="{{ url_for('dashboard') }}">
+                <span class="logo">✓</span> TaskTrack
+            </a>
+            <nav class="menu" aria-label="Navegación principal">
+                <a href="{{ url_for('dashboard') }}">Mis Tareas</a>
+                <a href="{{ url_for('categorias') }}">Categorías</a>
+                <a href="{{ url_for('perfil') }}">Perfil</a>
+            </nav>
+            <div class="usuario-menu">
+                <span>Hola, {{ session.get('usuario_nombre') }}</span>
+                <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+    {% endif %}
+
+    <main class="contenedor contenido {% block main_class %}{% endblock %}">
+        {% with mensajes = get_flashed_messages(with_categories=true, category_filter=['exito', 'error']) %}
+            {% if mensajes %}
+                <section class="mensajes" aria-live="polite">
+                    {% for categoria, mensaje in mensajes %}
+                        <div class="alerta alerta-{{ categoria }}">{{ mensaje }}</div>
+                    {% endfor %}
+                </section>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}TaskTrack - Categorías{% endblock %}
+{% block content %}
+<div class="titulo-acciones"><h1>Categorías</h1></div>
+
+{% with errores = get_flashed_messages(category_filter=['categoria']) %}
+    {% if errores %}<div class="errores">{% for error in errores %}<p>{{ error }}</p>{% endfor %}</div>{% endif %}
+{% endwith %}
+
+<section class="categoria-form">
+    <h2>{{ 'Editar categoría' if categoria_editar else 'Nueva categoría' }}</h2>
+    <form action="{{ url_for('actualizar_categoria', categoria_id=categoria_editar.id) if categoria_editar else url_for('crear_categoria') }}" method="post">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" name="nombre" value="{{ categoria_editar.nombre if categoria_editar else nombre_form }}" required>
+        <button class="boton boton-azul" type="submit">{{ 'Actualizar' if categoria_editar else '＋ Nueva Categoría' }}</button>
+        {% if categoria_editar %}<a class="boton boton-claro" href="{{ url_for('categorias') }}">Cancelar</a>{% endif %}
+    </form>
+</section>
+
+<div class="tabla-contenedor">
+    <table>
+        <thead><tr><th>Nombre</th><th>Cantidad de tareas</th><th>Acciones</th></tr></thead>
+        <tbody>
+        {% for categoria in categorias %}
+            <tr>
+                <td>{{ categoria.nombre }}</td>
+                <td>{{ categoria.cantidad_tareas }}</td>
+                <td class="acciones-tabla">
+                    <a href="{{ url_for('detalle_categoria', categoria_id=categoria.id) }}">Ver</a>
+                    <a href="{{ url_for('categorias', editar=categoria.id) }}">Editar</a>
+                    <form action="{{ url_for('borrar_categoria', categoria_id=categoria.id) }}" method="post" onsubmit="return confirm('¿Seguro que deseas borrar esta categoría?');">
+                        <button class="accion-roja" type="submit">Borrar</button>
+                    </form>
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="3" class="vacio">Aún no tienes categorías.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

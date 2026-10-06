@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}TaskTrack - Login / Registro{% endblock %}
+{% block main_class %}acceso-pagina{% endblock %}
+{% block content %}
+<section class="acceso-encabezado">
+    <div class="marca marca-grande"><span class="logo">✓</span> TaskTrack</div>
+    <p>Organiza tus tareas y proyectos</p>
+</section>
+
+<div class="acceso-grid">
+    <section class="tarjeta">
+        <h1>Crear Cuenta</h1>
+        {% with errores = get_flashed_messages(category_filter=['registro']) %}
+            {% if errores %}
+                <div class="errores">
+                    {% for error in errores %}<p>{{ error }}</p>{% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('registro') }}" method="post" class="formulario">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" value="{{ registro.get('nombre', '') }}" required>
+
+            <label for="apellido">Apellido</label>
+            <input id="apellido" name="apellido" value="{{ registro.get('apellido', '') }}" required>
+
+            <label for="email-registro">E-mail</label>
+            <input id="email-registro" type="email" name="email" value="{{ registro.get('email', '') }}" required>
+
+            <label for="password-registro">Contraseña</label>
+            <input id="password-registro" type="password" name="password" required>
+
+            <label for="confirmar-password">Confirmar contraseña</label>
+            <input id="confirmar-password" type="password" name="confirmar_password" required>
+
+            <button class="boton boton-oscuro boton-ancho" type="submit">Registrarse</button>
+        </form>
+        <a class="enlace-bajo" href="#iniciar-sesion">¿Ya tienes cuenta? Inicia sesión</a>
+    </section>
+
+    <section class="tarjeta" id="iniciar-sesion">
+        <h1>Iniciar Sesión</h1>
+        {% with errores = get_flashed_messages(category_filter=['login']) %}
+            {% if errores %}
+                <div class="errores">
+                    {% for error in errores %}<p>{{ error }}</p>{% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        <form action="{{ url_for('login') }}" method="post" class="formulario">
+            <label for="email-login">E-mail</label>
+            <input id="email-login" type="email" name="email" value="{{ login_email }}" required>
+
+            <label for="password-login">Contraseña</label>
+            <input id="password-login" type="password" name="password" required>
+
+            <button class="boton boton-oscuro boton-ancho" type="submit">Iniciar Sesión</button>
+        </form>
+        <a class="enlace-bajo" href="#nombre">¿No tienes cuenta? Regístrate</a>
+    </section>
+</div>
+{% endblock %}

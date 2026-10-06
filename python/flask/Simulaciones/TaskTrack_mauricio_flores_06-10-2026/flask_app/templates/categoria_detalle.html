@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}TaskTrack - {{ categoria.nombre }}{% endblock %}
+{% block content %}
+<div class="titulo-acciones">
+    <div><h1>{{ categoria.nombre }}</h1><p class="texto-suave">{{ categoria.cantidad_tareas }} tarea(s) en esta categoría.</p></div>
+    <a class="boton boton-claro" href="{{ url_for('categorias') }}">Volver</a>
+</div>
+<div class="tabla-contenedor">
+    <table>
+        <thead><tr><th>Título</th><th>Prioridad</th><th>Fecha límite</th><th>Estado</th><th>Acciones</th></tr></thead>
+        <tbody>
+        {% for tarea in tareas %}
+            <tr>
+                <td>{{ tarea.titulo }}</td>
+                <td><span class="etiqueta prioridad-{{ tarea.prioridad|lower }}">{{ tarea.prioridad }}</span></td>
+                <td>{{ tarea.fecha_limite.strftime('%d-%m-%Y') }}</td>
+                <td><span class="etiqueta estado-{{ tarea.estado|lower|replace(' ', '-') }}">{{ tarea.estado }}</span></td>
+                <td><a href="{{ url_for('detalle_tarea', tarea_id=tarea.id) }}">Ver</a></td>
+            </tr>
+        {% else %}
+            <tr><td colspan="5" class="vacio">Esta categoría todavía no contiene tareas.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

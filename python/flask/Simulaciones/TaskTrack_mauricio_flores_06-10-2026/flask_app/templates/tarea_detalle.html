@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}TaskTrack - Detalle de Tarea{% endblock %}
+{% block content %}
+<div class="titulo-acciones">
+    <h1>{{ tarea.titulo }}</h1>
+    <a class="boton boton-claro" href="{{ url_for('editar_tarea', tarea_id=tarea.id) }}">Editar</a>
+</div>
+
+<section class="detalle-tarea">
+    <dl>
+        <div><dt>📁 Categoría:</dt><dd>{{ tarea.categoria }}</dd></div>
+        <div><dt>⬆ Prioridad:</dt><dd><span class="etiqueta prioridad-{{ tarea.prioridad|lower }}">{{ tarea.prioridad }}</span></dd></div>
+        <div><dt>● Estado:</dt><dd><span class="etiqueta estado-{{ tarea.estado|lower|replace(' ', '-') }}">{{ tarea.estado }}</span></dd></div>
+        <div><dt>▣ Fecha límite:</dt><dd>{{ tarea.fecha_limite.strftime('%d-%m-%Y') }}</dd></div>
+        <div><dt>👤 Creado por:</dt><dd>{{ tarea.creador }}</dd></div>
+        <div class="descripcion-detalle"><dt>📄 Descripción:</dt><dd>{{ tarea.descripcion }}</dd></div>
+    </dl>
+    {% if tarea.estado != 'Completada' %}
+    <form action="{{ url_for('completar_tarea', tarea_id=tarea.id) }}" method="post">
+        <button class="boton boton-verde" type="submit">✓ Marcar como completada</button>
+    </form>
+    {% endif %}
+</section>
+
+<section class="comentarios">
+    <h2>Comentarios ({{ comentarios|length }})</h2>
+    <div class="lista-comentarios">
+        {% for comentario in comentarios %}
+        <article class="comentario">
+            <span class="avatar">●</span>
+            <strong>{{ comentario.autor }}</strong>
+            <p>{{ comentario.contenido }}</p>
+            <time>{{ comentario.created_at.strftime('%d-%m-%Y %H:%M') }}</time>
+            {% if comentario.usuario_id == session.get('usuario_id') %}
+            <form action="{{ url_for('borrar_comentario', tarea_id=tarea.id, comentario_id=comentario.id) }}" method="post">
+                <button class="accion-roja" type="submit">Borrar</button>
+            </form>
+            {% endif %}
+        </article>
+        {% else %}
+        <p class="vacio">Todavía no hay comentarios.</p>
+        {% endfor %}
+    </div>
+
+    {% with errores = get_flashed_messages(category_filter=['comentario']) %}
+        {% if errores %}<div class="errores">{% for error in errores %}<p>{{ error }}</p>{% endfor %}</div>{% endif %}
+    {% endwith %}
+    <form class="nuevo-comentario" action="{{ url_for('crear_comentario', tarea_id=tarea.id) }}" method="post">
+        <textarea name="contenido" rows="2" maxlength="500" placeholder="Escribe un comentario..." required></textarea>
+        <button class="boton boton-oscuro" type="submit">Comentar</button>
+    </form>
+</section>
+
+<a class="volver" href="{{ url_for('dashboard') }}">← Volver a Mis Tareas</a>
+{% endblock %}
