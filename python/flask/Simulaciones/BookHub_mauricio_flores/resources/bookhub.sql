@@ -1,4 +1,3 @@
--- Ejecutar completo en MySQL Workbench. No elimina bases ni datos existentes.
 CREATE DATABASE IF NOT EXISTS bookhub
     CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE bookhub;
